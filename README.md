@@ -84,3 +84,5 @@ To build a chatbot with Rasa, we will need the following files:
 The actions.py file contains the following custom actions:
 - retrieve info from a disease from a database : disease_info.json will be used as the database. The function takes a disease name, and a info topic (such as symptoms, treatments, description...) and returns the retrieved info to the user. 
 - predict a disease based on a user's symtpoms : this function loads a pretrained pipeline model and uses it to predict a disesase based on a user's symptoms in a numerical vector form. The function returns the name of the disease. 
+
+The ChatbotApp.py file contains the code for the TKinter GUI interface. To use the trained RASA chatbot with the TKinter interface, run the Chatbot.App.py file. 
