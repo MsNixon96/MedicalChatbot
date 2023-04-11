@@ -74,15 +74,29 @@ The scope of our chatbot is further defined below:
 -	The Medical Chatbot should be able to understand if the user wants to know more information about a disease. 
 -	If the user doesn’t specify what information they want to know about a disease, the chatbot should ask if the user wants to know the description, symptoms, or treatments for a disease. 
 
+
 To build a chatbot with Rasa, we will need the following files:
--	data/nlu_data.json : This file will contain the training data for Rasa NLU in json format. It lists the possible ways a user might utter an intent. For example, the user might say “Hey” or “Hi” for a “greeting” intent. The file also labels any entities that may be found in a user’s text. For example, if the user inputs “I want to order a cheese pizza”, the entity is  “cheese pizza” and the entity type is “order_item”. 
--	config.yml : This file lists the configuration settings for Rasa NLU and Rasa Core pipelines. It specifies the NLU pipeline to use, the policies for dialogue management, and other important settings.
--	domain.yml : This file lists all the intents, entities, slots, actions, and responses for our chatbot. Slots are used to keep track of any user information that will be needed for future actions. For example, an “order_details” slot might be used to remember a user’s order items throughout the conversation. The chatbot can then use this slot to confirm a user’s order. 
--	data/stories.yml : This file contains possible conversation flows, named stories, between the user and the chatbot. Each story lists a user’s input, followed by the chatbot’s actions, or expected responses. 
--	actions.py : This file contains any custom actions that the chatbot may need to perform. For example, the chatbot may need to retrieve information from a database. 
+
+-	**data/nlu_data.json** : 
+This file will contain the training data for Rasa NLU in json format. It lists the possible ways a user might utter an intent. For example, the user might say “Hey” or “Hi” for a “greeting” intent. The file also labels any entities that may be found in a user’s text. For example, if the user inputs “I want to order a cheese pizza”, the entity is  “cheese pizza” and the entity type is “order_item”.
+
+-	**config.yml** : 
+This file lists the configuration settings for Rasa NLU and Rasa Core pipelines. It specifies the NLU pipeline to use, the policies for dialogue management, and other important settings.
+
+-	**domain.yml** : 
+This file lists all the intents, entities, slots, actions, and responses for our chatbot. Slots are used to keep track of any user information that will be needed for future actions. For example, an “order_details” slot might be used to remember a user’s order items throughout the conversation. The chatbot can then use this slot to confirm a user’s order. 
+
+-	**data/stories.yml** : 
+This file contains possible conversation flows, named stories, between the user and the chatbot. Each story lists a user’s input, followed by the chatbot’s actions, or expected responses. 
+
+-	**actions.py** : 
+This file contains any custom actions that the chatbot may need to perform. For example, the chatbot may need to retrieve information from a database. 
+
 
 The actions.py file contains the following custom actions:
-- retrieve info from a disease from a database : disease_info.json will be used as the database. The function takes a disease name, and a info topic (such as symptoms, treatments, description...) and returns the retrieved info to the user. 
-- predict a disease based on a user's symtpoms : this function loads a pretrained pipeline model and uses it to predict a disesase based on a user's symptoms in a numerical vector form. The function returns the name of the disease. 
+- **retrieve info from a disease from a database** : disease_info.json will be used as the database. The function takes a disease name, and a info topic (such as symptoms, treatments, description...) and returns the retrieved info to the user. 
+
+- **predict a disease based on a user's symtpoms** : this function loads a pretrained pipeline model and uses it to predict a disesase based on a user's symptoms in a numerical vector form. The function returns the name of the disease. 
+
 
 The ChatbotApp.py file contains the code for the TKinter GUI interface. To use the trained RASA chatbot with the TKinter interface, run the Chatbot.App.py file. 
