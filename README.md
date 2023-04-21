@@ -94,7 +94,7 @@ This file contains any custom actions that the chatbot may need to perform. For 
 
 
 The actions.py file contains the following custom actions:
-- **retrieve info from a disease from a database** : symptom_Description.csv and symptom_precautin.csv will be used as the disease info database. The function takes a disease name and returns the information about the disease to the user. 
+- **retrieve info for a disease from a database** : symptom_Description.csv and symptom_precautin.csv will be used as the disease info database. The function takes a disease name and returns the information about the disease to the user. 
 
 - **predict a disease based on a user's symtpoms** : this function loads a pretrained machine learning model and uses it to predict a disesase based on a user's symptoms. The function returns the name of the disease. 
 
