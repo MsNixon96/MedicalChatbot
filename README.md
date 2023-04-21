@@ -77,7 +77,7 @@ The scope of our chatbot is further defined below:
 
 To build a chatbot with Rasa, we will need the following files:
 
--	**data/nlu_data.json** : 
+-	**data/nlu.md** : 
 This file will contain the training data for Rasa NLU in json format. It lists the possible ways a user might utter an intent. For example, the user might say “Hey” or “Hi” for a “greeting” intent. The file also labels any entities that may be found in a user’s text. For example, if the user inputs “I want to order a cheese pizza”, the entity is  “cheese pizza” and the entity type is “order_item”.
 
 -	**config.yml** : 
@@ -94,9 +94,9 @@ This file contains any custom actions that the chatbot may need to perform. For 
 
 
 The actions.py file contains the following custom actions:
-- **retrieve info from a disease from a database** : disease_info.json will be used as the database. The function takes a disease name, and a info topic (such as symptoms, treatments, description...) and returns the retrieved info to the user. 
+- **retrieve info from a disease from a database** : symptom_Description.csv and symptom_precautin.csv will be used as the disease info database. The function takes a disease name and returns the information about the disease to the user. 
 
-- **predict a disease based on a user's symtpoms** : this function loads a pretrained pipeline model and uses it to predict a disesase based on a user's symptoms in a numerical vector form. The function returns the name of the disease. 
+- **predict a disease based on a user's symtpoms** : this function loads a pretrained machine learning model and uses it to predict a disesase based on a user's symptoms. The function returns the name of the disease. 
 
 
 The ChatbotApp.py file contains the code for the TKinter GUI interface. To use the trained RASA chatbot with the TKinter interface, run the Chatbot.App.py file. 
