@@ -63,7 +63,7 @@ The medical chatbot has the following features;
 - retrieve information about a disease
 - predict a disease based on user's symptoms
 
-![alt text](images/MedBot_Flow_Diagram.png)
+![alt text](images/MedBot_Flow_Diagram2.png)
 
 The scope of our chatbot is further defined below:
 -	The Medical Chatbot should be able to understand greetings and reply with a greeting. 
