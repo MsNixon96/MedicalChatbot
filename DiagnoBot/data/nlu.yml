@@ -1,0 +1,366 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+- intent: complete
+  examples: |
+    - I'm done
+    - no more
+    - that's all I have
+    - that's all for now
+    - I'm finished
+    - I already did it
+    - I don't have anymore
+    - It's complete
+    - I'm through
+    - I have no more to add
+    - that's all there is
+    - I have nothing else to say
+    - That's all i can enter
+    - that's everything
+    - I have no more input
+    - that's all I had
+    - that's all i want to insert
+    - that's all i want to do
+    - I don't have anymore symptoms
+    - that's all
+    - that's all the symptoms i have
+    - i'm done
+- intent: start_over
+  examples: |
+    - I want to try again.
+    - Can I start over?
+    - Can I re-enter that
+    - Let me enter them again
+    - Let me try again.
+    - let me start over.
+    - start over
+    - try again
+    - reset
+    - clear
+    - start from the beginning
+    - show me the menu again
+    - I want to go again
+    - I messed up. Let me start over.
+    - can you go back to the start
+    - go back to the menu
+    - start from scratch
+    - can I give it another shot?
+    - can you restart the process
+    - can we reset the conversation
+    - please begin from the top
+    - start from the top
+    - I want to enter new symptoms
+    - nevermind
+    - i change my mind
+    - i messed up. can i reenter my symptoms
+    - nevermind. can you start over
+- intent: symptom_checker
+  examples: |
+    - I want to try the symptom checker
+    - check my symptoms
+    - what disease do i have based on my symptoms
+    - diagnose my symptoms
+    - diagnose me
+    - what is the symptom checker
+    - what do I do in the symptom checker
+    - how do i use the symptom checker
+    - explain the symptom checker
+    - can you predict my disease if I give you my symptoms
+    - what disease do I have
+    - can you tell me which disease matches my symptoms
+    - try the symptom checker
+    - I don't feel good. Can you tell me what's wrong with me?
+    - I don't feel so well.
+    - I feel terrible today
+    - I feel sick
+    - symptom checker
+    - i want to try the symptom checker
+    - I want to enter new symptoms
+- intent: show_symptoms
+  examples: |
+    - Show me a list of symptoms I can choose
+    - What symptoms can I pick
+    - show symptoms
+    - Tell me the symptom I can pick
+    - Which symptoms can i enter
+    - How can i select a valid symptom
+    - what are valid symptoms
+    - why is my symptom invalid
+    - what symptoms do you know
+    - whay symptoms do you have
+- intent: select_symptoms
+  examples: |
+    - My skin is [itching](symptom)
+    - I am [itching](symptom)
+    - I have a [skin rash](symptom)
+    - I'm experiencing [weight gain](symptom) and [increased appetite](symptom)
+    - I have [cold hands and feets](symptom)
+    - I keep [shivering](symptom)
+    - I can't stop [vomitting](symptom)
+    - I have bad [anxiety](symptom)
+    - My symptom is [joint pain](symptom)
+    - I also get [cramps](symptom)
+- intent: show_diseases
+  examples: |
+    - Show me a list of diseases I can choose
+    - What diseases can I pick
+    - show diseases
+    - Tell me the diseases I can pick
+    - Which diseases can i enter
+    - How can i select a valid disease
+    - what are valid diseases
+    - why is my disease invalid
+    - what diseases do you know
+    - whay diseases do you have
+- intent: select_diseases
+  examples: |
+    - I want to learn more about a disease
+    - tell me more about a disease
+    - Tell me more about [Jaundice](disease)
+    - I want to know more about [Diabetes](disease)
+    - What is [Dimorphic hemmorhoids piles](disease)
+    - Can you explain [Hepatitis C](disease)
+    - What does [GERD](disease) mean?
+    - I'm curious about [Acne](disease) and [Fungal infection](disease)
+    - How is [Malaria](disease) diagnosed
+    - What are the treatments for [Psoriasis](disease)
+    - Is [AIDS](disease) a serious illness?
+    - What causes [Arthritis](disease)
+    - What triggers [Migraine](disease)
+    - How can I prevent [Bronchial Asthma](disease)
+    - I think I have [Common Cold](disease). What should I do
+    - How do I know if I have [Chicken pox](disease)
+    - Do I have [Osteoarthristis](disease) or [Tuberculosis](disease)
+    - Am I suffering from a [Drug Reaction](disease)
+    - Is there a cure for [Tuberculosis](disease)
+    - What should I know about [Alcoholic hepatitis](disease)
+    - What are the symptoms of [Cervical spondylosis](disease)
+    - What is the difference between [hepatitis A](disease) and [Hepatitis B](disease)
+    - I've heard about [Hypothyroidism](disease), what is it?
+    - I don't know what [Varicose veins](disease) are
+    - actually i want to learn about a disease
+    - i want to learn about [GERD](disease)
+    - I want to learn about [Diabetes](disease)
+    - i want to know more about a disease
+    - i want to learn about [GERD](disease) and [Diabetes](disease)
+    - learn more about [GERD](disease)
+- lookup: symptom
+  examples: |
+    - abdominal pain
+    - abnormal menstruation
+    - acidity
+    - acute liver failure
+    - altered sensorium
+    - anxiety
+    - back pain
+    - belly pain
+    - blackheads
+    - bladder discomfort
+    - blister
+    - blood in sputum
+    - bloody stool
+    - blurred and distorted vision
+    - breathlessness
+    - brittle nails
+    - bruising
+    - burning micturition
+    - chest pain
+    - chills
+    - cold hands and feets
+    - coma
+    - congestion
+    - constipation
+    - continuous feel of urine
+    - continuous sneezing
+    - cough
+    - cramps
+    - dark urine
+    - dehydration
+    - depression
+    - diarrhoea
+    - dischromic patches
+    - distention of abdomen
+    - dizziness
+    - drying and tingling lips
+    - enlarged thyroid
+    - excessive hunger
+    - extra marital contacts
+    - family history
+    - fast heart rate
+    - fatigue
+    - fluid overload
+    - fluid overload
+    - foul smell of urine
+    - headache
+    - high fever
+    - hip joint pain
+    - history of alcohol consumption
+    - increased appetite
+    - indigestion
+    - inflammatory nails
+    - internal itching
+    - irregular sugar level
+    - irritability
+    - irritation in anus
+    - itching
+    - joint pain
+    - knee pain
+    - lack of concentration
+    - lethargy
+    - loss of appetite
+    - loss of balance
+    - loss of smell
+    - malaise
+    - mild fever
+    - mood swings
+    - movement stiffness
+    - mucoid sputum
+    - muscle pain
+    - muscle wasting
+    - muscle weakness
+    - nausea
+    - neck pain
+    - nodal skin eruptions
+    - obesity
+    - pain behind the eyes
+    - pain during bowel movements
+    - pain in anal region
+    - painful walking
+    - palpitations
+    - passage of gases
+    - patches in throat
+    - phlegm
+    - polyuria
+    - prominent veins on calf
+    - puffy face and eyes
+    - pus filled pimples
+    - receiving blood transfusion
+    - receiving unsterile injections
+    - red sore around nose
+    - red spots over body
+    - redness of eyes
+    - restlessness
+    - runny nose
+    - rusty sputum
+    - scurring
+    - shivering
+    - silver like dusting
+    - sinus pressure
+    - skin peeling
+    - skin rash
+    - slurred speech
+    - small dents in nails
+    - spinning movements
+    - spotting urination
+    - stiff neck
+    - stomach bleeding
+    - stomach pain
+    - sunken eyes
+    - sweating
+    - swelled lymph nodes
+    - swelling joints
+    - swelling of stomach
+    - swollen blood vessels
+    - swollen extremeties
+    - swollen legs
+    - throat irritation
+    - toxic look typhos
+    - ulcers on tongue
+    - unsteadiness
+    - visual disturbances
+    - vomiting
+    - watering from eyes
+    - weakness in limbs
+    - weakness of one body side
+    - weight gain
+    - weight loss
+    - yellow crust ooze
+    - yellow urine
+    - yellowing of eyes
+    - yellowish skin
+- lookup: disease
+  examples: |
+    - AIDS
+    - Acne
+    - Alcoholic hepatitis
+    - Allergy
+    - Arthritis
+    - Bronchial Asthma
+    - Cervical spondylosis
+    - Chicken pox
+    - Chronic cholestasis
+    - Common Cold
+    - Dengue
+    - Diabetes 
+    - Dimorphic hemmorhoids piles
+    - Drug Reaction
+    - Fungal infection
+    - GERD
+    - Gastroenteritis
+    - Heart attack
+    - Hepatitis B
+    - Hepatitis C
+    - Hepatitis D
+    - Hepatitis E
+    - Hypertension 
+    - Hyperthyroidism
+    - Hypoglycemia
+    - Hypothyroidism
+    - Impetigo
+    - Jaundice
+    - Malaria
+    - Migraine
+    - Osteoarthristis
+    - Paralysis brain hemorrhage
+    - Peptic ulcer diseae
+    - Pneumonia
+    - Psoriasis
+    - Tuberculosis
+    - Typhoid
+    - Urinary tract infection
+    - Varicose veins
+    - hepatitis A
+    - vertigo Paroymsal Positional Vertigo

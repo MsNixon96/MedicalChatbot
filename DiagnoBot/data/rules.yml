@@ -1,0 +1,98 @@
+version: "3.1"
+
+rules:
+
+  - rule: Say goodbye anytime the user says goodbye
+    steps:
+    - intent: goodbye
+    - action: utter_goodbye
+    - action: action_restart
+
+  - rule: Display default menu anytime the user says hi
+    steps:
+    - intent: greet
+    - action: utter_greet
+    - action: utter_default_menu
+    
+  - rule: Listen for user answer after displaying default menu
+    steps:
+    - action: utter_default_menu
+    - action: action_listen
+
+  - rule: Say goodbye if user doesn't want to select a menu option
+    steps:
+    - action: utter_default_menu
+    - or:
+      - intent: complete
+      - intent: deny
+    - action: utter_goodbye
+
+  - rule: Display default menu anytime the user wants to restart conversation
+    steps:
+      - intent: start_over
+      - action: action_clear_symptoms
+      - action: utter_default_menu
+
+  - rule: Ask user for symptoms when they want to try the symptom checker
+    steps:
+    - intent: symptom_checker
+    - action: utter_symptom_checker
+    - action: utter_ask_symptoms
+
+  - rule: Show user dropdown list of symptoms when they want to see symptom options
+    steps:
+    - intent: show_symptoms
+    - action: utter_symptoms_menu
+
+  - rule: Listen for user answer after asking for symptoms
+    steps:
+    - action: utter_ask_symptoms
+    - action: action_listen
+
+  - rule: Store symptoms after user inputs symptoms
+    steps:
+    - intent: select_symptoms
+    - action: action_select_symptoms
+
+  - rule: Listen for user answer after action_select_symptoms
+    steps:
+    - action: action_select_symptoms
+    - action: action_listen
+
+  - rule: Ask for symptoms if user wants to enter more symptoms
+    steps:
+    - action: action_select_symptoms
+    - action: action_listen
+    - intent: affirm
+    - action: utter_ask_symptoms
+
+  - rule: Listen for user input after trying to predict a disease
+    steps:
+    - action: action_select_symptoms
+    - action: action_listen
+    - or:
+      - intent: deny
+      - intent: complete 
+    - action: action_predict_disease
+    - action: action_listen
+
+  - rule: Clear symptoms if the user wants to enter new symptoms 
+    steps:
+    - action: action_select_symptoms
+    - action: action_listen
+    - intent: start_over
+    - action: action_clear_symptoms
+    - action: utter_reset_symptoms
+    - action: utter_ask_symptoms
+
+  - rule: Give information about a disease when user enters disease
+    steps:
+    - intent: select_diseases
+    - action: action_select_diseases
+    - action: action_listen
+
+  - rule: Show user dropdown list of diseases when they want to see disease options
+    steps:
+    - intent: show_diseases
+    - action: utter_diseases_menu
+

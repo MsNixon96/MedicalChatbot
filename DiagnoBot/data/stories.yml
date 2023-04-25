@@ -1,0 +1,340 @@
+version: "3.1"
+
+stories:
+- story: show symptom dropdown menu
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - intent: symptom_checker
+  - action: utter_symptom_checker
+  - action: utter_ask_symptoms
+  - intent: show_symptoms
+  - action: utter_symptoms_menu
+  - intent: select_symptoms
+    entities:
+    - symptom: neck pain
+  - action: action_select_symptoms
+  - slot_was_set:
+    - symptom: 
+      - neck pain
+
+- story: show disease dropdown menu
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - intent: select_diseases
+  - action: action_select_diseases
+  - intent: show_diseases
+  - action: utter_diseases_menu
+  - intent: select_diseases
+    entities:
+    - disease: Common Cold
+  - action: action_select_diseases
+  - slot_was_set:
+    - symptom: 
+      - Common Cold
+
+- story: User greets the chatbot then says goodbye
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: action_restart
+
+- story: User enters 5 symptoms and receives a prediction
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - intent: symptom_checker
+  - action: utter_symptom_checker
+  - action: utter_ask_symptoms
+  - intent: select_symptoms
+    entities:
+    - symptom: anxiety
+    - symptom: depression
+  - action: action_select_symptoms
+  - slot_was_set:
+    - symptoms:
+      - anxiety
+      - depression
+  - intent: show_symptoms
+  - action: utter_symptoms_menu
+  - intent: select_symptoms
+    entities:
+    - symptom: skin rash
+  - action: action_select_symptoms
+  - slot_was_set:
+    - symptoms:
+      - anxiety
+      - depression
+      - skin rash
+  - intent: select_symptoms
+    entities:
+    - symptom: blister
+    - symptom: headache
+  - action: action_select_symptoms
+  - slot_was_set:
+    - symptoms:
+      - anxiety
+      - depression
+      - skin rash
+      - blister
+      - headache
+  - or:
+    - intent: complete
+    - intent: deny
+  - action: action_predict_disease
+  - slot_was_set:
+    - symptoms: []
+
+- story: User re-enters 5 new symptoms to Symptom Checker and receives a prediction
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - intent: select_symptoms
+    entities:
+    - symptom: anxiety
+    - symptom: depression
+    - symptom: skin rash
+  - action: action_select_symptoms
+  - slot_was_set:
+    - symptoms:
+      - anxiety
+      - depression
+      - skin rash
+  - intent: start_over
+  - action: action_clear_symptoms
+  - slot_was_set:
+    - symptoms: []
+  - action: utter_reset_symptoms
+  - action: utter_ask_symptoms
+  - intent: show_symptoms
+  - action: utter_symptoms_menu
+  - intent: select_symptoms
+    entities:
+    - symptom: blister
+  - action: action_select_symptoms
+  - slot_was_set:
+    - symptoms:
+      - blister
+  - intent: select_symptoms
+    entities:
+    - symptom: headache
+    - symptom: joint pain
+    - symptom: skin rash
+    - symptom: shivering
+  - action: action_select_symptoms
+  - slot_was_set:
+    - symptoms:
+      - blister
+      - headache
+      - joint pain
+      - skin rash
+      - shivering
+  - or:
+    - intent: complete
+    - intent: deny
+  - action: action_predict_disease
+  - slot_was_set:
+    - symptoms: []
+
+- story: User refuses to enter more than 5 symptoms for Symptom Checker
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - intent: symptom_checker
+  - action: utter_symptom_checker
+  - action: utter_ask_symptoms
+  - intent: select_symptoms
+    entities:
+    - symptom: anxiety
+    - symptom: depression
+  - action: action_select_symptoms
+  - slot_was_set:
+    - symptoms:
+      - anxiety
+      - depression
+  - or:
+    - intent: complete
+    - intent: deny
+  - action: action_predict_disease
+  - or:
+    - intent: complete
+    - intent: deny
+  - action: utter_default_menu
+
+- story: A disease prediction was made on the second attempt after user entered more symptoms
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - intent: select_symptoms
+    entities:
+    - symptom: anxiety
+    - symptom: depression
+  - action: action_select_symptoms
+  - slot_was_set:
+    - symptoms:
+      - anxiety
+      - depression
+  - or:
+    - intent: complete
+    - intent: deny
+  - action: action_predict_disease
+  - intent: select_symptoms
+    entities:
+    - symptom: blister
+    - symptom: joint pain
+    - symptom: skin rash
+  - action: action_select_symptoms
+  - slot_was_set:
+    - symptoms:
+      - anxiety
+      - depression
+      - blister
+      - joint pain
+      - skin rash
+  - intent: show_symptoms
+  - action: utter_symptoms_menu
+  - intent: select_symptoms
+    entities:
+    - symptom: runny nose
+  - action: action_select_symptoms
+  - slot_was_set:
+    - symptoms:
+      - anxiety
+      - depression
+      - blister
+      - joint pain
+      - skin rash
+      - runny nose
+  - or:
+    - intent: complete
+    - intent: deny
+  - action: action_predict_disease
+  - slot_was_set:
+    - symptoms: []
+
+
+- story: User doesn't know which menu option to choose
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - intent: symptom_checker
+  - action: utter_symptom_checker
+  - action: utter_ask_symptoms
+  - intent: select_diseases
+  - action: action_select_diseases
+  - intent: start_over
+  - action: action_clear_symptoms
+  - slot_was_set:
+    - symptoms: []
+  - action: utter_default_menu
+
+- story: User wants to restart after seeing symptoms menu
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - intent: symptom_checker
+  - action: utter_symptom_checker
+  - action: utter_ask_symptoms
+  - intent: show_symptoms
+  - action: utter_symptoms_menu
+  - intent: start_over
+  - action: action_clear_symptoms
+  - slot_was_set:
+    - symptoms: []
+  - action: utter_default_menu
+
+- story: User wants to restart after seeing disease menu
+  steps:
+  - intent: select_diseases
+  - action: action_select_diseases
+  - intent: show_diseases
+  - action: utter_diseases_menu
+  - intent: start_over
+  - action: action_clear_symptoms
+  - slot_was_set:
+    - symptoms: []
+  - action: utter_default_menu
+
+- story: User wants to leearn about multiple diseases 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - intent: select_diseases
+    entities:
+    - disease: GERD
+  - action: action_select_diseases
+  - intent: show_diseases
+  - action: utter_diseases_menu
+  - intent: select_diseases
+    entities:
+    - disease: Diabetes
+  - action: action_select_diseases
+  - action: action_listen
+
+- story: User doesn't want to try anymore menu options 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - intent: select_diseases
+    entities:
+    - disease: GERD
+  - action: action_select_diseases
+  - or:
+    - intent: complete
+    - intent: deny
+  - action: utter_goodbye
+
+- story: User doesn't want to try anymore menu options 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - or:
+    - intent: complete
+    - intent: deny
+  - action: utter_goodbye
+
+- story: User doesn't want to try anymore menu options 3
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_default_menu
+  - intent: select_symptoms
+    entities:
+    - symptom: anxiety
+    - symptom: depression
+    - symptom: joint pain
+    - symptom: mood swings
+    - symptom: cramps
+  - action: action_select_symptoms
+  - slot_was_set:
+    - symptoms:
+      - anxiety
+      - depression
+      - joint pain
+      - mood swings
+      - cramps
+  - intent: deny
+  - action: action_predict_disease
+  - slot_was_set:
+    - symptoms: []
+  - or:
+    - intent: complete
+    - intent: deny
+  - action: utter_goodbye
+
+
