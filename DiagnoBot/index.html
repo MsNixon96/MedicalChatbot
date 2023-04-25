@@ -1,0 +1,38 @@
+<html>
+    <body>
+        <script>
+            function handlePayload(payload) {
+                // Check if the payload is for a dropdown menu
+                if (payload.custom && payload.custom.payload === "dropdown") {
+                    // Call the renderDropDown function with the options
+                    renderDropDown(payload.custom.options);
+                } else {
+                    // Handle other payloads as needed
+                }
+            }
+            
+            !(function () {
+                let e = document.createElement("script"),
+                    t = document.head || document.getElementsByTagName("head")[0];
+                (e.src = "https://cdn.jsdelivr.net/npm/rasa-webchat@1.x.x/lib/index.js"),
+                // Replace 1.x.x with the version that you want
+                (e.async = !0),
+                (e.onload = () => {
+                    window.WebChat.default(
+                        {
+                            initPayload: '/greet',
+                            customData: { language: "en" },
+                            socketUrl: "http://localhost:5005",
+                            // Add other props here
+                            handlePayload: handlePayload // Pass the handlePayload function
+                        },
+                        null
+                    );
+                }),
+                t.insertBefore(e, t.firstChild);
+            })();
+        </script>
+        
+        <script src="dropDown.js"></script> <!-- Include the dropDown.js file -->
+    </body>
+</html>
