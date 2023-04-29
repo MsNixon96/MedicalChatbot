@@ -88,6 +88,17 @@ class ActionPredictDisease(Action):
                         dispatcher.utter_message(text=f"{predicted_disease} is a disease that {disInfo}")
                         break
 
+            #Give the user a list of precautions to be aware of with their possible condition. 
+            with open("symptom_precaution.csv", "r") as f:
+                csvPrec = csv.DictReader(f)
+                for row in csvPrec:
+                    if  row["Disease"] == predicted_disease:
+                        prec1 = row["Precaution_1"]
+                        prec2 = row["Precaution_2"]
+                        prec3 = row["Precaution_3"]
+                        prec4 = row["Precaution_4"]
+                        dispatcher.utter_message(f"When suffering from {predicted_disease} you must take care to: {prec1}, {prec2}, {prec3}, and {prec4}. /n The advice given by this chatbot is not intended as a replacement for professional medical advice. As with any medical issue, be sure to consult with your physician.")
+
             dispatcher.utter_message(text=f"What would you like to do now? You can enter new symptoms or learn about another disease.")
 
             # Set the prediction_made slot and reset the symptoms slot
@@ -128,6 +139,17 @@ class SelectDiseases(Action):
                         disInfo = row["Description"]
                         dispatcher.utter_message(f"Here is some more information about {disease}: /n {disInfo}")
 
+            #Give the user a list of precautions to be aware of with their selected disease. 
+            with open("symptom_precaution.csv", "r") as f:
+                csvPrec = csv.DictReader(f)
+                for row in csvPrec:
+                    if  row["Disease"] == disease:
+                        prec1 = row["Precaution_1"]
+                        prec2 = row["Precaution_2"]
+                        prec3 = row["Precaution_3"]
+                        prec4 = row["Precaution_4"]
+                        dispatcher.utter_message(f"When suffering from {disease} you must take care to: {prec1}, {prec2}, {prec3}, and {prec4}. /n The advice given by this chatbot is not intended as a replacement for professional medical advice. As with any medical issue, be sure to consult with your physician.")
+            
             dispatcher.utter_message(f"What would you like to do next? You can insert a new disease or try the Symptom Checker.")
         except KeyError:
             dispatcher.utter_message(text=f"Please insert a valid disease. \nType \"show diseases\" to see a list of diseases.")
