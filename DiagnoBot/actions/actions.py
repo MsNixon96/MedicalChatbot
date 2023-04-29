@@ -12,6 +12,8 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
+import pickle
+import csv
 
 class SelectSymptoms(Action):
     # Capture symptom entered by user and add to list of symptoms
@@ -71,8 +73,21 @@ class ActionPredictDisease(Action):
             return[]
         else:
             # perform the disease prediction and return info about the disease
-            predicted_disease = "Asthma"
-            dispatcher.utter_message(text=f"{predicted_disease} is a disease that....")
+            # load pickled data
+            with open("model.pkl", "rb") as f:
+                model = pickle.load(f)
+
+            #predict disease based off of pickled model
+            predicted_disease = model.predict(symptoms)
+
+            with open("symptom_description.csv", "r") as f:
+                csvRead = csv.DictReader(f)
+                for row in csvRead:
+                    if row["Disease"] == predicted_disease:
+                        disInfo = row["Description"]
+                        dispatcher.utter_message(text=f"{predicted_disease} is a disease that {disInfo}")
+                        break
+
             dispatcher.utter_message(text=f"What would you like to do now? You can enter new symptoms or learn about another disease.")
 
             # Set the prediction_made slot and reset the symptoms slot
@@ -103,9 +118,18 @@ class SelectDiseases(Action):
             # Set the slot value to the selected option
             disease = tracker.get_slot('disease')
             SlotSet("disease", disease)
+
+
             dispatcher.utter_message(f"You selected {disease}.")
+            with open("symptom_description.csv", "r") as f:
+                csvRead = csv.DictReader(f)
+                for row in csvRead:
+                    if row["Disease"] == disease:
+                        disInfo = row["Description"]
+                        dispatcher.utter_message(f"Here is some more information about {disease}: /n {disInfo}")
 
             dispatcher.utter_message(f"What would you like to do next? You can insert a new disease or try the Symptom Checker.")
         except KeyError:
             dispatcher.utter_message(text=f"Please insert a valid disease. \nType \"show diseases\" to see a list of diseases.")
             return []
+        
