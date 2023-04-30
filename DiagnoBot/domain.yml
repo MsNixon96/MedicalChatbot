@@ -278,8 +278,8 @@ responses:
       Are you experiencing pain in any of the following areas: (Type "None" if none apply) 
       - Chest pain 
       - Joints pain 
-      - Knees pain 
-      - Muscles pain 
+      - Knee pain 
+      - Muscle pain 
       - Neck pain 
       - Pain in Anal Region
   utter_ask_skin_nails_symptoms:
@@ -338,14 +338,14 @@ responses:
     - title: No
       payload: /deny
 actions:
-- utter_thanks
-- action_predict_disease
-- utter_symptom_checker
 - action_confirm_symptoms
-- action_select_diseases
+- action_predict_disease
+- utter_thanks
+- utter_symptom_checker
 - action_reset_symptoms
-- utter_greet
 - utter_default_menu
+- action_select_diseases
+- utter_greet
 - validate_symptom_checker_form
 - utter_goodbye
 session_config:
