@@ -44,30 +44,196 @@ nlu:
     - don't like that
     - no way
     - not really
-- intent: complete
+    - none
+    - none apply to me
+    - not applicable
+    - non
+- intent: symptom_checker
   examples: |
-    - I'm done
-    - no more
-    - that's all I have
-    - that's all for now
-    - I'm finished
-    - I already did it
-    - I don't have anymore
-    - It's complete
-    - I'm through
-    - I have no more to add
-    - that's all there is
-    - I have nothing else to say
-    - That's all i can enter
-    - that's everything
-    - I have no more input
-    - that's all I had
-    - that's all i want to insert
-    - that's all i want to do
-    - I don't have anymore symptoms
-    - that's all
-    - that's all the symptoms i have
-    - i'm done
+    - I want to try the symptom checker
+    - check my symptoms
+    - what disease do i have based on my symptoms
+    - diagnose my symptoms
+    - diagnose me
+    - what is the symptom checker
+    - what do I do in the symptom checker
+    - how do i use the symptom checker
+    - explain the symptom checker
+    - can you predict my disease if I give you my symptoms
+    - what disease do I have
+    - can you tell me which disease matches my symptoms
+    - try the symptom checker
+    - I don't feel good. Can you tell me what's wrong with me?
+    - I don't feel so well.
+    - I feel terrible today
+    - I feel sick
+    - symptom checker
+    - i want to try the symptom checker
+- intent: select_symptom
+  examples: |
+    - My skin is [itching](symptom)
+    - I am [itching](symptom)
+    - I have a [skin rash](symptom)
+    - I'm experiencing [weight gain](symptom) and [increased appetite](symptom)
+    - I have [swelling of stomach](symptom)
+    - I keep [shivering](symptom)
+    - I can't stop [vomiting](symptom)
+    - I have bad [acidity](symptom)
+    - My symptom is [joint pain](symptom)
+    - I also get [patches in throat](symptom)
+    - I have [yellowing of eyes](symptom)
+    - i want to enter [chills](symptom)
+    - i have [chills](symptom) and [cough](symptom)
+    - i have [chills](symptom) and [fatigue](symptom)
+    - i have a [cough](symptom)
+    - i have a [headache](symptom)
+    - i have [itching](symptom)
+    - i have [patches in throat](symptom)
+    - I have [abdominal pain](symptom)
+    - I have [abnormal menstruation](symptom)
+    - I have [acidity](symptom)
+    - I have [acute liver failure](symptom)
+    - I have [altered sensorium](symptom)
+    - I have [anxiety](symptom) and [continuous feel of urine](symptom)
+    - I have [back pain](symptom)
+    - I have [belly pain](symptom)
+    - I have [blackheads](symptom)
+    - I have [bladder discomfort](symptom)
+    - I have [blister](symptom), [constipation](symptom) and [congestion](symptom)
+    - I have [blood in sputum](symptom)
+    - I have [bloody stool](symptom)
+    - I have [blurred and distorted vision](symptom) and [dark urine](symptom)
+    - I have [breathlessness](symptom)
+    - I have [brittle nails](symptom)
+    - I have [bruising](symptom) and [diarrhoea](symptom)
+    - I have [burning micturition]
+    - I have [chest pain](symptom) and [cold hands and feets](symptom)
+    - I was in a [coma](symptom)
+    - [continuous sneezing](symptom)
+    - I have really bad [cramps](symptom)
+    - I think i'm suffering from [dehydration](symptom) and [depression](symptom)
+    - [dischromic patches](symptom)
+    - [distention of abdomen](symptom)
+    - [dizziness](symptom)
+    - [drying and tingling lips](symptom)
+    - [enlarged thyroid](symptom)
+    - [excessive hunger](symptom)
+    - [extra marital contacts](symptom)
+    - [family history](symptom)
+    - [fast heart rate](symptom)
+    - [fatigue](symptom)
+    - [fluid overload](symptom)
+    - [foul smell of urine](symptom)
+    - [headache](symptom)
+    - [high fever](symptom)
+    - [hip joint pain](symptom)
+    - [history of alcohol consumption](symptom)
+    - [increased appetite](symptom)
+    - [indigestion](symptom)
+    - [inflammatory nails](symptom)
+    - [internal itching](symptom)
+    - [irregular sugar level](symptom)
+    - [irritability](symptom)
+    - [irritation in anus](symptom)
+    - [itching](symptom)
+    - [joint pain](symptom)
+    - [knee pain](symptom)
+    - [lack of concentration](symptom)
+    - [lethargy](symptom)
+    - [loss of appetite](symptom)
+    - [loss of balance](symptom)
+    - [loss of smell](symptom)
+    - [malaise](symptom)
+    - [mild fever](symptom)
+    - [mood swings](symptom)
+    - [movement stiffness](symptom)
+    - [mucoid sputum](symptom)
+    - [muscle pain](symptom)
+    - [muscle wasting](symptom)
+    - [muscle weakness](symptom)
+    - [nausea](symptom)
+    - [neck pain](symptom)
+    - [nodal skin eruptions](symptom)
+    - [obesity](symptom)
+    - [pain behind the eyes](symptom)
+    - [pain during bowel movements](symptom)
+    - [pain in anal region](symptom)
+    - [painful walking](symptom)
+    - [palpitations](symptom)
+    - [passage of gases](symptom)
+    - [patches in throat](symptom)
+    - [phlegm](symptom)
+    - [polyuria](symptom)
+    - [prominent veins on calf](symptom)
+    - [puffy face and eyes](symptom)
+    - [pus filled pimples](symptom)
+    - [receiving blood transfusion](symptom)
+    - [receiving unsterile injections](symptom)
+    - [red sore around nose](symptom)
+    - [red spots over body](symptom)
+    - [redness of eyes](symptom)
+    - [restlessness](symptom)
+    - [runny nose](symptom)
+    - [rusty sputum](symptom)
+    - [scurring](symptom)
+    - [shivering](symptom)
+    - [silver like dusting](symptom)
+    - [sinus pressure](symptom)
+    - [skin peeling](symptom)
+    - [skin rash](symptom)
+    - [slurred speech](symptom)
+    - [small dents in nails](symptom)
+    - [spinning movements](symptom)
+    - [spotting urination](symptom)
+    - [stiff neck](symptom)
+    - [stomach bleeding](symptom)
+    - [stomach pain](symptom)
+    - [sunken eyes](symptom)
+    - [sweating](symptom)
+    - [swelled lymph nodes](symptom)
+    - [swelling joints](symptom)
+    - [swelling of stomach](symptom)
+    - [swollen blood vessels](symptom)
+    - [swollen extremeties](symptom)
+    - [swollen legs](symptom)
+    - [throat irritation](symptom)
+    - [toxic look typhos](symptom)
+    - [ulcers on tongue](symptom)
+    - [unsteadiness](symptom)
+    - [visual disturbances](symptom)
+    - [vomiting](symptom)
+    - [watering from eyes](symptom)
+    - [weakness in limbs](symptom)
+    - [weakness of one body side](symptom)
+    - [weight gain](symptom)
+    - [weight loss](symptom)
+    - [yellow crust ooze](symptom)
+    - I don't know if i have [yellow urine](symptom)
+    - [yellowing of eyes](symptom)
+    - [yellowish skin](symptom)
+    - i have a [high fever](symptom) and [chills](symptom)
+    - i have [nausea](symptom)
+    - i have [chills](symptom)
+    - i have [cough](symptom)
+    - i have [vomiting](symptom)
+    - i have [high fever](symptom)
+    - i have [rusty sputum](symptom)
+    - i have a [stiff neck](symptom)
+    - [chills](symptom)
+    - i have a [cough](symptom)
+    - i have [constipation](symptom)
+    - i have [painful walking](symptom)
+    - i have [pain in anal region](symptom)
+    - i have a [skin rash](symptom)
+- intent: confirm_symptoms
+  examples: |
+    - What symptoms did i enter
+    - Repeat my symptoms
+    - I forgot what symptoms i gave you
+    - Tell my the symptoms you stored
+    - which symptoms did you store
+    - list all my symptoms
+    - i want to confirm my symptoms
 - intent: start_over
   examples: |
     - I want to try again.
@@ -97,64 +263,13 @@ nlu:
     - i change my mind
     - i messed up. can i reenter my symptoms
     - nevermind. can you start over
-- intent: symptom_checker
-  examples: |
-    - I want to try the symptom checker
-    - check my symptoms
-    - what disease do i have based on my symptoms
-    - diagnose my symptoms
-    - diagnose me
-    - what is the symptom checker
-    - what do I do in the symptom checker
-    - how do i use the symptom checker
-    - explain the symptom checker
-    - can you predict my disease if I give you my symptoms
-    - what disease do I have
-    - can you tell me which disease matches my symptoms
-    - try the symptom checker
-    - I don't feel good. Can you tell me what's wrong with me?
-    - I don't feel so well.
-    - I feel terrible today
-    - I feel sick
-    - symptom checker
-    - i want to try the symptom checker
-    - I want to enter new symptoms
-- intent: show_symptoms
-  examples: |
-    - Show me a list of symptoms I can choose
-    - What symptoms can I pick
-    - show symptoms
-    - Tell me the symptom I can pick
-    - Which symptoms can i enter
-    - How can i select a valid symptom
-    - what are valid symptoms
-    - why is my symptom invalid
-    - what symptoms do you know
-    - whay symptoms do you have
-- intent: select_symptoms
-  examples: |
-    - My skin is [itching](symptom)
-    - I am [itching](symptom)
-    - I have a [skin rash](symptom)
-    - I'm experiencing [weight gain](symptom) and [increased appetite](symptom)
-    - I have [cold hands and feets](symptom)
-    - I keep [shivering](symptom)
-    - I can't stop [vomitting](symptom)
-    - I have bad [anxiety](symptom)
-    - My symptom is [joint pain](symptom)
-    - I also get [cramps](symptom)
-- intent: show_diseases
-  examples: |
-    - Show me a list of diseases I can choose
-    - What diseases can I pick
-    - show diseases
-    - Tell me the diseases I can pick
-    - Which diseases can i enter
-    - How can i select a valid disease
-    - what are valid diseases
-    - why is my disease invalid
-    - what diseases do you know
-    - whay diseases do you have
+    - I want to start over
+    - I want to try again
+    - Can I try again
+    - I want to re-enter my symptoms
+    - reenter my symptoms
+    - reset my symptoms
+    - Let me enter new symptoms
 - intent: select_diseases
   examples: |
     - I want to learn more about a disease
@@ -187,180 +302,54 @@ nlu:
     - i want to know more about a disease
     - i want to learn about [GERD](disease) and [Diabetes](disease)
     - learn more about [GERD](disease)
-- lookup: symptom
-  examples: |
-    - abdominal pain
-    - abnormal menstruation
-    - acidity
-    - acute liver failure
-    - altered sensorium
-    - anxiety
-    - back pain
-    - belly pain
-    - blackheads
-    - bladder discomfort
-    - blister
-    - blood in sputum
-    - bloody stool
-    - blurred and distorted vision
-    - breathlessness
-    - brittle nails
-    - bruising
-    - burning micturition
-    - chest pain
-    - chills
-    - cold hands and feets
-    - coma
-    - congestion
-    - constipation
-    - continuous feel of urine
-    - continuous sneezing
-    - cough
-    - cramps
-    - dark urine
-    - dehydration
-    - depression
-    - diarrhoea
-    - dischromic patches
-    - distention of abdomen
-    - dizziness
-    - drying and tingling lips
-    - enlarged thyroid
-    - excessive hunger
-    - extra marital contacts
-    - family history
-    - fast heart rate
-    - fatigue
-    - fluid overload
-    - fluid overload
-    - foul smell of urine
-    - headache
-    - high fever
-    - hip joint pain
-    - history of alcohol consumption
-    - increased appetite
-    - indigestion
-    - inflammatory nails
-    - internal itching
-    - irregular sugar level
-    - irritability
-    - irritation in anus
-    - itching
-    - joint pain
-    - knee pain
-    - lack of concentration
-    - lethargy
-    - loss of appetite
-    - loss of balance
-    - loss of smell
-    - malaise
-    - mild fever
-    - mood swings
-    - movement stiffness
-    - mucoid sputum
-    - muscle pain
-    - muscle wasting
-    - muscle weakness
-    - nausea
-    - neck pain
-    - nodal skin eruptions
-    - obesity
-    - pain behind the eyes
-    - pain during bowel movements
-    - pain in anal region
-    - painful walking
-    - palpitations
-    - passage of gases
-    - patches in throat
-    - phlegm
-    - polyuria
-    - prominent veins on calf
-    - puffy face and eyes
-    - pus filled pimples
-    - receiving blood transfusion
-    - receiving unsterile injections
-    - red sore around nose
-    - red spots over body
-    - redness of eyes
-    - restlessness
-    - runny nose
-    - rusty sputum
-    - scurring
-    - shivering
-    - silver like dusting
-    - sinus pressure
-    - skin peeling
-    - skin rash
-    - slurred speech
-    - small dents in nails
-    - spinning movements
-    - spotting urination
-    - stiff neck
-    - stomach bleeding
-    - stomach pain
-    - sunken eyes
-    - sweating
-    - swelled lymph nodes
-    - swelling joints
-    - swelling of stomach
-    - swollen blood vessels
-    - swollen extremeties
-    - swollen legs
-    - throat irritation
-    - toxic look typhos
-    - ulcers on tongue
-    - unsteadiness
-    - visual disturbances
-    - vomiting
-    - watering from eyes
-    - weakness in limbs
-    - weakness of one body side
-    - weight gain
-    - weight loss
-    - yellow crust ooze
-    - yellow urine
-    - yellowing of eyes
-    - yellowish skin
-- lookup: disease
-  examples: |
-    - AIDS
-    - Acne
-    - Alcoholic hepatitis
-    - Allergy
-    - Arthritis
-    - Bronchial Asthma
-    - Cervical spondylosis
-    - Chicken pox
-    - Chronic cholestasis
-    - Common Cold
-    - Dengue
-    - Diabetes 
-    - Dimorphic hemmorhoids piles
-    - Drug Reaction
-    - Fungal infection
-    - GERD
-    - Gastroenteritis
-    - Heart attack
-    - Hepatitis B
-    - Hepatitis C
-    - Hepatitis D
-    - Hepatitis E
-    - Hypertension 
-    - Hyperthyroidism
-    - Hypoglycemia
-    - Hypothyroidism
-    - Impetigo
-    - Jaundice
-    - Malaria
-    - Migraine
-    - Osteoarthristis
-    - Paralysis brain hemorrhage
-    - Peptic ulcer diseae
-    - Pneumonia
-    - Psoriasis
-    - Tuberculosis
-    - Typhoid
-    - Urinary tract infection
-    - Varicose veins
-    - hepatitis A
-    - vertigo Paroymsal Positional Vertigo
+    - I want to learn more about [infectious diseases](disease)
+    - What are the [cardiovascular diseases](disease)
+    - What are [endocrine diseases](disease)
+    - list the [gastrointestinal diseases](disease)
+    - show me all the [hematological diseases](disease)
+    - What are the [musculoskeletal diseases](disease)
+    - Can you tell me more about [neurological diseases](disease)
+    - show me the options for [respiratory diseases](disease)
+    - show me the menu of [skin diseases](disease)
+    - [AIDS](disease)
+    - [Acne](disease)
+    - [Alcoholic hepatitis](disease)
+    - [Allergy](disease)
+    - [Arthritis](disease)
+    - [Bronchial Asthma](disease)
+    - [Cervical spondylosis](disease)
+    - [Chicken pox](disease)
+    - [Chronic cholestasis](disease)
+    - [Common Cold](disease)
+    - [Dengue](disease)
+    - [Diabetes](disease)
+    - [Dimorphic hemmorhoids piles](disease)
+    - [Drug Reaction](disease)
+    - [Fungal infection](disease)
+    - [GERD](disease)
+    - [Gastroenteritis](disease)
+    - [Heart attack](disease)
+    - [Hepatitis B](disease)
+    - [Hepatitis C](disease)
+    - [Hepatitis D](disease)
+    - [Hepatitis E](disease)
+    - [Hypertension](disease)
+    - [Hyperthyroidism](disease)
+    - [Hypoglycemia](disease)
+    - [Hypothyroidism](disease)
+    - [Impetigo](disease)
+    - [Jaundice](disease)
+    - [Malaria](disease)
+    - [Migraine](disease)
+    - [Osteoarthristis](disease)
+    - [Paralysis brain hemorrhage](disease)
+    - [Peptic ulcer diseae](disease)
+    - [Pneumonia](disease)
+    - [Psoriasis](disease)
+    - [Tuberculosis](disease)
+    - [Typhoid](disease)
+    - [Urinary tract infection](disease)
+    - [Varicose veins](disease)
+    - [hepatitis A](disease)
+    - [vertigo Paroymsal Positional Vertigo](disease)
+    - i want to learn about [acne](disease)
