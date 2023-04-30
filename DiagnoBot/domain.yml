@@ -10,8 +10,8 @@ intents:
 - start_over
 - symptom_checker
 entities:
-- disease
 - symptom
+- disease
 slots:
   symptoms:
     type: list
@@ -338,11 +338,11 @@ responses:
     - title: No
       payload: /deny
 actions:
-- action_confirm_symptoms
-- utter_symptom_checker
-- action_select_diseases
-- action_predict_disease
 - utter_thanks
+- action_predict_disease
+- utter_symptom_checker
+- action_confirm_symptoms
+- action_select_diseases
 - action_reset_symptoms
 - utter_greet
 - utter_default_menu
