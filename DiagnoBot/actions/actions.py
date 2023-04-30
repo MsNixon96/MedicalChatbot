@@ -15,6 +15,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
 import pickle
 import csv
+import numpy as np
 
 
 class ValidateSymptomCheckerForm(FormValidationAction):
@@ -265,12 +266,34 @@ class ActionPredictDisease(Action):
             return [AllSlotsReset(), SlotSet("symptoms", symptoms), FollowupAction("symptom_checker_form")]
         else:
             # perform the disease prediction and return info about the disease
+
+            symptoms_List = ['itching', 'skin rash', 'nodal skin eruptions', 'continuous sneezing', 
+                             'shivering', 'chills', 'joint pain', 'stomach pain', 'acidity', 'vomiting', 
+                             'spotting  urination', 'fatigue', 'weight loss', 'lethargy', 'patches in throat', 'cough', 
+                             'high fever', 'breathlessness', 'sweating', 'dehydration', 'headache', 'yellowish skin', 'dark urine', 
+                             'nausea', 'loss of appetite', 'pain behind the eyes', 'back pain', 'abdominal pain', 'diarrhoea', 'mild fever', 
+                             'yellowing of eyes', 'swelling of stomach', 'swelled lymph nodes', 'malaise', 'phlegm', 'throat irritation', 'chest pain', 
+                             'fast heart rate', 'pain during bowel movements', 'pain in anal region', 'bloody stool', 'neck pain', 'dizziness', 'bruising', 
+                             'obesity', 'enlarged thyroid', 'excessive hunger', 'extra marital contacts', 'slurred speech', 'knee pain', 'muscle weakness', 
+                             'stiff neck', 'swelling joints', 'movement stiffness', 'spinning movements', 'loss of balance', 'unsteadiness', 
+                             'weakness of one body side', 'bladder discomfort', 'continuous feel of urine', 'internal itching', 'toxic look typhos', 
+                             'depression', 'irritability', 'muscle pain', 'altered sensorium', 'red spots over body', 'belly pain', 'abnormal menstruation', 
+                             'dischromic  patches', 'increased appetite', 'polyuria', 'family history', 'mucoid sputum', 'rusty sputum', 'lack of concentration', 
+                             'visual disturbances', 'receiving blood transfusion', 'receiving unsterile injections', 'coma', 'stomach bleeding', 'blood in sputum', 
+                             'prominent veins on calf', 'palpitations', 'pus filled pimples', 'blackheads', 'silver like dusting', 'small dents in nails', 'blister', 'red sore around nose']
+            
+            symptoms_array = np.array([1 if s in symptoms else 0 for s in symptoms_List]).reshape(1, -1)
+
             # load pickled data
-            #with open("model.pkl", "rb") as f:
-                #model = pickle.load(f)
+            with open("diseasePrediction/model.pkl", "rb") as f:
+                model = pickle.load(f)
+
+            with open("diseasePrediction/le.pkl", "rb") as f:
+                le = pickle.load(f)
 
             #predict disease based off of pickled model
-            predicted_disease = "Acne"
+            y_pred = model.predict(symptoms_array)
+            predicted_disease = le.inverse_transform(y_pred)
 
             with open("symptom_description.csv", "r") as f:
                 csvRead = csv.DictReader(f)
