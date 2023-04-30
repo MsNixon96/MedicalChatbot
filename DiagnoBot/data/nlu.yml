@@ -220,11 +220,18 @@ nlu:
     - i have [rusty sputum](symptom)
     - i have a [stiff neck](symptom)
     - [chills](symptom)
-    - i have a [cough](symptom)
     - i have [constipation](symptom)
     - i have [painful walking](symptom)
     - i have [pain in anal region](symptom)
     - i have a [skin rash](symptom)
+    - i have [chills](symptom) and [fatigue](symptom)
+    - i have [cough](symptom)
+    - i have [nausea](symptom)
+    - i have a [stiff neck](symptom)
+    - i have [muscles pain](symptom)
+    - i have [muscle pain](symptom)
+    - i have [chills](symptom) and [loss of smell](symptom)
+    - i have [breathlessness](symptom)
 - intent: confirm_symptoms
   examples: |
     - What symptoms did i enter

@@ -471,290 +471,6 @@ stories:
   - intent: affirm
   - action: action_predict_disease 
 
-- story: User doesn't have enough symptoms to receive disease prediction the first time
-  steps:
-  - intent: symptom_checker
-  - action: utter_symptom_checker
-  - action: symptom_checker_form
-  - active_loop: symptom_checker_form
-  - slot_was_set:
-    - requested_slot: flu_symptoms
-  - intent: select_symptom
-    entities:
-    - symptom: chills
-  - slot_was_set:
-    - flu_symptoms: chills
-  - action: symptom_checker_form
-  - slot_was_set:
-    - flu_symptoms: complete
-  - slot_was_set:
-    - symptoms:
-      - chills
-  - slot_was_set:
-    - requested_slot: respiratory_symptoms
-  - intent: select_symptom
-    entities:
-    - symptom: cough
-  - slot_was_set:
-    - respiratory_symptoms: cough
-  - action: symptom_checker_form
-  - slot_was_set:
-    - respiratory_symptoms: complete
-  - slot_was_set:
-    - symptoms:
-      - chills
-      - cough
-  - slot_was_set:
-    - requested_slot: gastro_symptoms
-  - intent: select_symptom
-    entities:
-    - symptom: vomiting
-  - slot_was_set:
-    - gastro_symptoms: vomiting
-  - action: symptom_checker_form
-  - slot_was_set:
-    - gastro_symptoms: complete
-  - slot_was_set:
-    - symptoms:
-      - chills
-      - cough
-      - vomiting
-  - slot_was_set:
-    - requested_slot: neuro_symptoms
-  - intent: deny
-  - slot_was_set:
-    - neuro_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - neuro_symptoms: complete
-  - slot_was_set:
-    - requested_slot: body_pain_symptoms
-  - intent: deny
-  - slot_was_set:
-    - body_pain_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - body_pain_symptoms: complete
-  - slot_was_set:
-    - requested_slot: skin_nails_symptoms
-  - intent: deny
-  - slot_was_set:
-    - skin_nails_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - skin_nails_symptoms: complete
-  - slot_was_set:
-    - requested_slot: internal_itching_symptoms
-  - intent: deny
-  - slot_was_set:
-    - internal_itching_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - internal_itching_symptoms: complete
-  - slot_was_set:
-    - requested_slot: appearance_symptoms
-  - intent: deny
-  - slot_was_set:
-    - appearance_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - appearance_symptoms: complete
-  - slot_was_set:
-    - requested_slot: reproductive_symptoms
-  - intent: deny
-  - slot_was_set:
-    - reproductive_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - reproductive_symptoms: complete
-  - slot_was_set:
-    - requested_slot: urinary_symptoms
-  - intent: deny
-  - slot_was_set:
-    - urinary_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - urinary_symptoms: complete
-  - slot_was_set:
-    - requested_slot: unsterile_injections_symptoms
-  - intent: deny
-  - slot_was_set:
-    - unsterile_injections_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - unsterile_injections_symptoms: complete
-  - slot_was_set:
-    - requested_slot: family_history
-  - intent: deny
-  - slot_was_set:
-    - family_history: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - family_history: complete
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: utter_thanks
-  - action: action_confirm_symptoms
-  - intent: affirm
-  - action: action_predict_disease
-  - slot_was_set:
-    - symptoms:
-      - chills
-      - cough
-      - vomiting
-  - action: symptom_checker_form
-  - active_loop: symptom_checker_form
-  - slot_was_set:
-    - requested_slot: flu_symptoms
-  - intent: select_symptom
-    entities:
-    - symptom: high fever
-  - slot_was_set:
-    - flu_symptoms: high fever
-  - action: symptom_checker_form
-  - slot_was_set:
-    - flu_symptoms: complete
-  - slot_was_set:
-    - symptoms:
-      - chills
-      - cough
-      - vomiting
-      - high fever
-  - slot_was_set:
-    - requested_slot: respiratory_symptoms
-  - intent: select_symptom
-    entities:
-    - symptom: rusty sputum
-  - slot_was_set:
-    - respiratory_symptoms: rusty sputum
-  - action: symptom_checker_form
-  - slot_was_set:
-    - respiratory_symptoms: complete
-  - slot_was_set:
-    - symptoms:
-      - chills
-      - cough
-      - vomiting
-      - high fever
-      - rusty sputum
-  - slot_was_set:
-    - requested_slot: gastro_symptoms
-  - intent: deny
-  - slot_was_set:
-    - gastro_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - gastro_symptoms: complete
-  - slot_was_set:
-    - requested_slot: neuro_symptoms
-  - intent: select_symptom
-    entities:
-    - symptom: stiff neck
-  - slot_was_set:
-    - neuro_symptoms: stiff neck
-  - action: symptom_checker_form
-  - slot_was_set:
-    - neuro_symptoms: complete
-  - slot_was_set:
-    - symptoms:
-      - chills
-      - cough
-      - vomiting
-      - high fever
-      - rusty sputum
-      - stiff neck
-  - slot_was_set:
-    - requested_slot: body_pain_symptoms
-  - intent: deny
-  - slot_was_set:
-    - body_pain_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - body_pain_symptoms: complete
-  - slot_was_set:
-    - requested_slot: skin_nails_symptoms
-  - intent: deny
-  - slot_was_set:
-    - skin_nails_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - skin_nails_symptoms: complete
-  - slot_was_set:
-    - requested_slot: internal_itching_symptoms
-  - intent: affirm
-  - slot_was_set:
-    - internal_itching_symptoms: true
-  - action: symptom_checker_form
-  - slot_was_set:
-    - internal_itching_symptoms: complete
-  - slot_was_set:
-    - symptoms:
-      - chills
-      - cough
-      - vomiting
-      - high fever
-      - rusty sputum
-      - stiff neck
-      - internal itching
-  - slot_was_set:
-    - requested_slot: appearance_symptoms
-  - intent: deny
-  - slot_was_set:
-    - appearance_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - appearance_symptoms: complete
-  - slot_was_set:
-    - requested_slot: reproductive_symptoms
-  - intent: deny
-  - slot_was_set:
-    - reproductive_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - reproductive_symptoms: complete
-  - slot_was_set:
-    - requested_slot: urinary_symptoms
-  - intent: deny
-  - slot_was_set:
-    - urinary_symptoms: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - urinary_symptoms: complete
-  - slot_was_set:
-    - requested_slot: unsterile_injections_symptoms
-  - intent: affirm
-  - slot_was_set:
-    - unsterile_injections_symptoms: true
-  - action: symptom_checker_form
-  - slot_was_set:
-    - unsterile_injections_symptoms: complete
-  - slot_was_set:
-    - symptoms:
-      - chills
-      - cough
-      - vomiting
-      - high fever
-      - rusty sputum
-      - stiff neck
-      - internal itching
-      - receiving unsterile injections
-  - slot_was_set:
-    - requested_slot: family_history
-  - intent: deny
-  - slot_was_set:
-    - family_history: false
-  - action: symptom_checker_form
-  - slot_was_set:
-    - family_history: complete
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: utter_thanks
-  - action: action_confirm_symptoms
-  - intent: affirm
-  - action: action_predict_disease
-
 - story: interactive_story_1
   steps:
   - intent: symptom_checker
@@ -927,3 +643,236 @@ stories:
   - action: action_confirm_symptoms
   - intent: affirm
   - action: action_predict_disease
+
+- story: interactive_story_1
+  steps:
+  - intent: symptom_checker
+  - action: utter_symptom_checker
+  - action: symptom_checker_form
+  - active_loop: symptom_checker_form
+  - slot_was_set:
+    - requested_slot: flu_symptoms
+  - intent: select_symptom
+    entities:
+    - symptom: chills
+    - symptom: fatigue
+  - slot_was_set:
+    - flu_symptoms: fatigue
+  - action: symptom_checker_form
+  - slot_was_set:
+    - flu_symptoms: complete
+  - slot_was_set:
+    - symptoms:
+      - chills
+      - fatigue
+  - slot_was_set:
+    - requested_slot: respiratory_symptoms
+  - intent: select_symptom
+    entities:
+    - symptom: cough
+  - slot_was_set:
+    - respiratory_symptoms: cough
+  - action: symptom_checker_form
+  - slot_was_set:
+    - respiratory_symptoms: complete
+  - slot_was_set:
+    - symptoms:
+      - chills
+      - fatigue
+      - cough
+  - slot_was_set:
+    - requested_slot: gastro_symptoms
+  - intent: select_symptom
+    entities:
+    - symptom: nausea
+  - slot_was_set:
+    - gastro_symptoms: nausea
+  - action: symptom_checker_form
+  - slot_was_set:
+    - gastro_symptoms: complete
+  - slot_was_set:
+    - symptoms:
+      - chills
+      - fatigue
+      - cough
+      - nausea
+  - slot_was_set:
+    - requested_slot: neuro_symptoms
+  - intent: select_symptom
+    entities:
+    - symptom: stiff neck
+  - slot_was_set:
+    - neuro_symptoms: stiff neck
+  - action: symptom_checker_form
+  - slot_was_set:
+    - neuro_symptoms: complete
+  - slot_was_set:
+    - symptoms:
+      - chills
+      - fatigue
+      - cough
+      - nausea
+      - stiff neck
+  - slot_was_set:
+    - requested_slot: body_pain_symptoms
+  - intent: select_symptom
+    entities:
+    - symptom: muscles pain
+  - slot_was_set:
+    - body_pain_symptoms: muscles pain
+  - action: symptom_checker_form
+  - slot_was_set:
+    - body_pain_symptoms: null
+  - slot_was_set:
+    - requested_slot: body_pain_symptoms
+  - intent: select_symptom
+    entities:
+    - symptom: muscle pain
+  - slot_was_set:
+    - body_pain_symptoms: muscle pain
+  - action: symptom_checker_form
+  - slot_was_set:
+    - body_pain_symptoms: complete
+  - slot_was_set:
+    - symptoms:
+      - chills
+      - fatigue
+      - cough
+      - nausea
+      - stiff neck
+      - muscle pain
+  - slot_was_set:
+    - requested_slot: skin_nails_symptoms
+
+- story: interactive_story_2
+  steps:
+  - intent: symptom_checker
+  - action: utter_symptom_checker
+  - action: symptom_checker_form
+  - active_loop: symptom_checker_form
+  - slot_was_set:
+    - requested_slot: flu_symptoms
+  - intent: select_symptom
+    entities:
+    - symptom: chills
+    - symptom: loss of smell
+  - slot_was_set:
+    - flu_symptoms: loss of smell
+  - action: symptom_checker_form
+  - slot_was_set:
+    - flu_symptoms: complete
+  - slot_was_set:
+    - symptoms:
+      - chills
+      - loss of smell
+  - slot_was_set:
+    - requested_slot: respiratory_symptoms
+  - intent: select_symptom
+    entities:
+    - symptom: breathlessness
+  - slot_was_set:
+    - respiratory_symptoms: breathlessness
+  - action: symptom_checker_form
+  - slot_was_set:
+    - respiratory_symptoms: complete
+  - slot_was_set:
+    - symptoms:
+      - chills
+      - loss of smell
+      - breathlessness
+  - slot_was_set:
+    - requested_slot: gastro_symptoms
+  - intent: deny
+  - slot_was_set:
+    - gastro_symptoms: false
+  - action: symptom_checker_form
+  - slot_was_set:
+    - gastro_symptoms: complete
+  - slot_was_set:
+    - requested_slot: neuro_symptoms
+  - intent: deny
+  - slot_was_set:
+    - neuro_symptoms: false
+  - action: symptom_checker_form
+  - slot_was_set:
+    - neuro_symptoms: complete
+  - slot_was_set:
+    - requested_slot: body_pain_symptoms
+  - intent: deny
+  - slot_was_set:
+    - body_pain_symptoms: false
+  - action: symptom_checker_form
+  - slot_was_set:
+    - body_pain_symptoms: complete
+  - slot_was_set:
+    - requested_slot: skin_nails_symptoms
+  - intent: deny
+  - slot_was_set:
+    - skin_nails_symptoms: false
+  - action: symptom_checker_form
+  - slot_was_set:
+    - skin_nails_symptoms: complete
+  - slot_was_set:
+    - requested_slot: internal_itching_symptoms
+  - intent: deny
+  - slot_was_set:
+    - internal_itching_symptoms: false
+  - action: symptom_checker_form
+  - slot_was_set:
+    - internal_itching_symptoms: complete
+  - slot_was_set:
+    - requested_slot: appearance_symptoms
+  - intent: deny
+  - slot_was_set:
+    - appearance_symptoms: false
+  - action: symptom_checker_form
+  - slot_was_set:
+    - appearance_symptoms: complete
+  - slot_was_set:
+    - requested_slot: reproductive_symptoms
+  - intent: deny
+  - slot_was_set:
+    - reproductive_symptoms: false
+  - action: symptom_checker_form
+  - slot_was_set:
+    - reproductive_symptoms: complete
+  - slot_was_set:
+    - requested_slot: urinary_symptoms
+  - intent: deny
+  - slot_was_set:
+    - urinary_symptoms: false
+  - action: symptom_checker_form
+  - slot_was_set:
+    - urinary_symptoms: complete
+  - slot_was_set:
+    - requested_slot: unsterile_injections_symptoms
+  - intent: deny
+  - slot_was_set:
+    - unsterile_injections_symptoms: false
+  - action: symptom_checker_form
+  - slot_was_set:
+    - unsterile_injections_symptoms: complete
+  - slot_was_set:
+    - requested_slot: family_history
+  - intent: deny
+  - slot_was_set:
+    - family_history: false
+  - action: symptom_checker_form
+  - slot_was_set:
+    - family_history: complete
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_thanks
+  - action: action_confirm_symptoms
+  - intent: affirm
+  - action: action_predict_disease
+  - slot_was_set:
+    - symptoms:
+      - chills
+      - loss of smell
+      - breathlessness
+  - action: symptom_checker_form
+  - active_loop: symptom_checker_form
+  - slot_was_set:
+    - requested_slot: flu_symptoms

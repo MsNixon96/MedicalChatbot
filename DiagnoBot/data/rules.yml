@@ -54,4 +54,3 @@ rules:
   - action: action_confirm_symptoms
   - intent: affirm
   - action: action_predict_disease
-
