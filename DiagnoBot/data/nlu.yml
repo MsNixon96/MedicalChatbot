@@ -48,6 +48,7 @@ nlu:
     - none apply to me
     - not applicable
     - non
+    - noen
 - intent: symptom_checker
   examples: |
     - I want to try the symptom checker
@@ -224,14 +225,17 @@ nlu:
     - i have [painful walking](symptom)
     - i have [pain in anal region](symptom)
     - i have a [skin rash](symptom)
-    - i have [chills](symptom) and [fatigue](symptom)
-    - i have [cough](symptom)
-    - i have [nausea](symptom)
-    - i have a [stiff neck](symptom)
     - i have [muscles pain](symptom)
     - i have [muscle pain](symptom)
     - i have [chills](symptom) and [loss of smell](symptom)
     - i have [breathlessness](symptom)
+    - i have [weight loss](symptom)
+    - i have [mild fever](symptom)
+    - i have [high fever](symptom) and [sweating](symptom)
+    - i have [cough](symptom)
+    - i have [weight loss](symptom)
+    - i have [rusty sputum](symptom)
+    - i am [vomiting](symptom)
 - intent: confirm_symptoms
   examples: |
     - What symptoms did i enter

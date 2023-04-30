@@ -54,3 +54,17 @@ rules:
   - action: action_confirm_symptoms
   - intent: affirm
   - action: action_predict_disease
+
+- rule: Reset symptoms 2
+  steps:
+  - action: action_predict_disease
+  - intent: start_over
+  - action: action_reset_symptoms
+  - action: symptom_checker_form
+  - active_loop: symptom_checker_form
+
+- rule: Reset symptoms 2
+  steps:
+  - action: action_predict_disease
+  - intent: select_diseases
+  - action: action_select_diseases
