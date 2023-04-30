@@ -298,6 +298,7 @@ class ActionPredictDisease(Action):
                         prec3 = row["Precaution_3"]
                         prec4 = row["Precaution_4"]
                         dispatcher.utter_message(f"When suffering from {predicted_disease} you must take care to: {prec1}, {prec2}, {prec3}, and {prec4}. /n The advice given by this chatbot is not intended as a replacement for professional medical advice. As with any medical issue, be sure to consult with your physician.")
+                        return [FollowupAction("utter_default_menu")]
 
 
         return [AllSlotsReset(), FollowupAction("symptom_checker_form")]
