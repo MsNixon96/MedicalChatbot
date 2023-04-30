@@ -1,426 +1,353 @@
 version: '3.1'
 intents:
 - affirm
+- confirm_symptoms
 - deny
 - goodbye
 - greet
-- complete
+- select_diseases
+- select_symptom
 - start_over
 - symptom_checker
-- select_diseases
-- select_symptoms
-- show_symptoms
-- show_diseases
 entities:
-- symptom
 - disease
+- symptom
 slots:
-  symptom:
-    type: text
-    mappings:
-    - type: from_entity
-      entity: symptom
   symptoms:
     type: list
-    initial_value: []
     mappings:
     - type: custom
+  flu_symptoms:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: flu_symptoms
+    - type: from_entity
+      entity: symptom
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: flu_symptoms
+  respiratory_symptoms:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: respiratory_symptoms
+    - type: from_entity
+      entity: symptom
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: respiratory_symptoms
+  gastro_symptoms:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: gastro_symptoms
+    - type: from_entity
+      entity: symptom
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: gastro_symptoms
+  neuro_symptoms:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: neuro_symptoms
+    - type: from_entity
+      entity: symptom
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: neuro_symptoms
+  body_pain_symptoms:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: body_pain_symptoms
+    - type: from_entity
+      entity: symptom
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: body_pain_symptoms
+  skin_nails_symptoms:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: skin_nails_symptoms
+    - type: from_entity
+      entity: symptom
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: skin_nails_symptoms
+  internal_itching_symptoms:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: internal_itching_symptoms
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: internal_itching_symptoms
+  appearance_symptoms:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: appearance_symptoms
+    - type: from_entity
+      entity: symptom
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: appearance_symptoms
+  reproductive_symptoms:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: reproductive_symptoms
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: reproductive_symptoms
+  urinary_symptoms:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: urinary_symptoms
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: urinary_symptoms
+    - type: from_entity
+      entity: symptom
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: urinary_symptoms
+  unsterile_injections_symptoms:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: unsterile_injections_symptoms
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: unsterile_injections_symptoms
+  family_history:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: family_history
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: family_history
   disease:
     type: text
     mappings:
     - type: from_entity
       entity: disease
+forms:
+  symptom_checker_form:
+    required_slots:
+    - flu_symptoms
+    - respiratory_symptoms
+    - gastro_symptoms
+    - neuro_symptoms
+    - body_pain_symptoms
+    - skin_nails_symptoms
+    - internal_itching_symptoms
+    - appearance_symptoms
+    - reproductive_symptoms
+    - urinary_symptoms
+    - unsterile_injections_symptoms
+    - family_history
 responses:
   utter_greet:
-  - text: Hi there! I'm DiagnoBot, a medical chatbot!
-  utter_did_that_help:
-  - text: Thank's for using my assistance! I'll be here when you need me.
+  - text: Hi there! I"m DiagnoBot, a medical chatbot!
   utter_goodbye:
-  - text: Bye
+  - text: Thank"s for using my assistance! I"ll be here when you need me.
   utter_default_menu:
-  - text: "What would you like to try today?"
+  - text: What would you like to try today?
     buttons:
-    - title: "Symptom Checker"
-      payload: "/symptom_checker"
-    - title: "Learn more about a disease"
-      payload: "/select_disease"
+    - title: Symptom Checker
+      payload: /symptom_checker
+    - title: Learn more about a disease
+      payload: /select_diseases
   utter_symptom_checker:
-  - text: 
-      The Symptom Checker is a program that predicts your disease based on your symptoms.
-       If you insert atleast 5 symptoms, I will predict your disease!
-  utter_ask_symptoms:
-  - text: What symptom(s) do you have? \nType "show symptoms" to see a list of symptoms. 
-  utter_reset_symptoms:
-  - text: Sure, you can enter new symptoms!
-  utter_symptoms_menu:
-  - text: "Please select a symptom from the list below:"
-    buttons: 
-      - title: "Abdominal pain"
-        payload: "/select_symptoms{'symptom': 'abdominal pain'}"
-      - title: "Abnormal menstruation"
-        payload: "/select_symptoms{'symptom': 'abnormal menstruation'}"
-      - title: "Acidity"
-        payload: "/select_symptoms{'symptom': 'acidity'}"
-      - title: "Acute liver failure"
-        payload: "/select_symptoms{'symptom': 'acute liver failure'}"
-      - title: "Altered sensorium"
-        payload: "/select_symptoms{'symptom': 'altered sensorium'}"
-      - title: "Anxiety"
-        payload: "/select_symptoms{'symptom': 'anxiety'}"
-      - title: "Back pain"
-        payload: "/select_symptoms{'symptom': 'back pain'}"
-      - title: "Belly pain"
-        payload: "/select_symptoms{'symptom': 'belly pain'}"
-      - title: "Blackheads"
-        payload: "/select_symptoms{'symptom': 'blackheads'}"
-      - title: "Bladder discomfort"
-        payload: "/select_symptoms{'symptom': 'bladder discomfort'}"
-      - title: "Blister"
-        payload: "/select_symptoms{'symptom': 'blister'}"
-      - title: "Blood in sputum"
-        payload: "/select_symptoms{'symptom': 'blood in sputum'}"
-      - title: "Bloody stool"
-        payload: "/select_symptoms{'symptom': 'bloody stool'}"
-      - title: "Blurred and distorted vision"
-        payload: "/select_symptoms{'symptom': 'blurred and distorted vision'}"
-      - title: "Breathlessness"
-        payload: "/select_symptoms{'symptom': 'breathlessness'}"
-      - title: "Brittle nails"
-        payload: "/select_symptoms{'symptom': 'brittle nails'}"
-      - title: "Bruising"
-        payload: "/select_symptoms{'symptom': 'bruising'}"
-      - title: "Burning micturition"
-        payload: "/select_symptoms{'symptom': 'burning micturition'}"
-      - title: "Chest pain"
-        payload: "/select_symptoms{'symptom': 'chest pain'}"
-      - title: "Chills"
-        payload: "/select_symptoms{'symptom': 'chills'}"
-      - title: "Cold hands and feets"
-        payload: "/select_symptoms{'symptom': 'cold hands and feets'}"
-      - title: "Coma"
-        payload: "/select_symptoms{'symptom': 'coma'}"
-      - title: "Congestion"
-        payload: "/select_symptoms{'symptom': 'congestion'}"
-      - title: "Constipation"
-        payload: "/select_symptoms{'symptom': 'constipation'}"
-      - title: "Continuous feel of urine"
-        payload: "/select_symptoms{'symptom': 'continuous feel of urine'}"
-      - title: "Continuous sneezing"
-        payload: "/select_symptoms{'symptom': 'continuous sneezing'}"
-      - title: "Cough"
-        payload: "/select_symptoms{'symptom': 'cough'}"
-      - title: "Cramps"
-        payload: "/select_symptoms{'symptom': 'cramps'}"
-      - title: "Dark urine"
-        payload: "/select_symptoms{'symptom': 'dark urine'}"
-      - title: "Dehydration"
-        payload: "/select_symptoms{'symptom': 'dehydration'}"
-      - title: "Depression"
-        payload: "/select_symptoms{'symptom': 'depression'}"
-      - title: "Diarrhoea"
-        payload: "/select_symptoms{'symptom': 'diarrhoea'}"
-      - title: "Dischromic patches"
-        payload: "/select_symptoms{'symptom': 'dischromic patches'}"
-      - title: "Distention of abdomen"
-        payload: "/select_symptoms{'symptom': 'distention of abdomen'}"
-      - title: "Dizziness"
-        payload: "/select_symptoms{'symptom': 'dizziness'}"
-      - title: "Drying and tingling lips"
-        payload: "/select_symptoms{'symptom': 'drying and tingling lips'}"
-      - title: "Enlarged thyroid"
-        payload: "/select_symptoms{'symptom': 'enlarged thyroid'}"
-      - title: "Excessive hunger"
-        payload: "/select_symptoms{'symptom': 'excessive hunger'}"
-      - title: "Extra marital contacts"
-        payload: "/select_symptoms{'symptom': 'extra marital contacts'}"
-      - title: "Family history"
-        payload: "/select_symptoms{'symptom': 'family history'}"
-      - title: "Fast heart rate"
-        payload: "/select_symptoms{'symptom': 'fast heart rate'}"
-      - title: "Fatigue"
-        payload: "/select_symptoms{'symptom': 'fatigue'}"
-      - title: "Fluid overload"
-        payload: "/select_symptoms{'symptom': 'fluid overload'}"
-      - title: "Fluid overload"
-        payload: "/select_symptoms{'symptom': 'fluid overload'}"
-      - title: "Foul smell of urine"
-        payload: "/select_symptoms{'symptom': 'foul smell of urine'}"
-      - title: "Headache"
-        payload: "/select_symptoms{'symptom': 'headache'}"
-      - title: "High fever"
-        payload: "/select_symptoms{'symptom': 'high fever'}"
-      - title: "Hip joint pain"
-        payload: "/select_symptoms{'symptom': 'hip joint pain'}"
-      - title: "History of alcohol consumption"
-        payload: "/select_symptoms{'symptom': 'history of alcohol consumption'}"
-      - title: "Increased appetite"
-        payload: "/select_symptoms{'symptom': 'increased appetite'}"
-      - title: "Indigestion"
-        payload: "/select_symptoms{'symptom': 'indigestion'}"
-      - title: "Inflammatory nails"
-        payload: "/select_symptoms{'symptom': 'inflammatory nails'}"
-      - title: "Internal itching"
-        payload: "/select_symptoms{'symptom': 'internal itching'}"
-      - title: "Irregular sugar level"
-        payload: "/select_symptoms{'symptom': 'irregular sugar level'}"
-      - title: "Irritability"
-        payload: "/select_symptoms{'symptom': 'irritability'}"
-      - title: "Irritation in anus"
-        payload: "/select_symptoms{'symptom': 'irritation in anus'}"
-      - title: "Itching"
-        payload: "/select_symptoms{'symptom': 'itching'}"
-      - title: "Joint pain"
-        payload: "/select_symptoms{'symptom': 'joint pain'}"
-      - title: "Knee pain"
-        payload: "/select_symptoms{'symptom': 'knee pain'}"
-      - title: "Lack of concentration"
-        payload: "/select_symptoms{'symptom': 'lack of concentration'}"
-      - title: "Lethargy"
-        payload: "/select_symptoms{'symptom': 'lethargy'}"
-      - title: "Loss of appetite"
-        payload: "/select_symptoms{'symptom': 'loss of appetite'}"
-      - title: "Loss of balance"
-        payload: "/select_symptoms{'symptom': 'loss of balance'}"
-      - title: "Loss of smell"
-        payload: "/select_symptoms{'symptom': 'loss of smell'}"
-      - title: "Malaise"
-        payload: "/select_symptoms{'symptom': 'malaise'}"
-      - title: "Mild fever"
-        payload: "/select_symptoms{'symptom': 'mild fever'}"
-      - title: "Mood swings"
-        payload: "/select_symptoms{'symptom': 'mood swings'}"
-      - title: "Movement stiffness"
-        payload: "/select_symptoms{'symptom': 'movement stiffness'}"
-      - title: "Mucoid sputum"
-        payload: "/select_symptoms{'symptom': 'mucoid sputum'}"
-      - title: "Muscle pain"
-        payload: "/select_symptoms{'symptom': 'muscle pain'}"
-      - title: "Muscle wasting"
-        payload: "/select_symptoms{'symptom': 'muscle wasting'}"
-      - title: "Muscle weakness"
-        payload: "/select_symptoms{'symptom': 'muscle weakness'}"
-      - title: "Nausea"
-        payload: "/select_symptoms{'symptom': 'nausea'}"
-      - title: "Neck pain"
-        payload: "/select_symptoms{'symptom': 'neck pain'}"
-      - title: "Nodal skin eruptions"
-        payload: "/select_symptoms{'symptom': 'nodal skin eruptions'}"
-      - title: "Obesity"
-        payload: "/select_symptoms{'symptom': 'obesity'}"
-      - title: "Pain behind the eyes"
-        payload: "/select_symptoms{'symptom': 'pain behind the eyes'}"
-      - title: "Pain during bowel movements"
-        payload: "/select_symptoms{'symptom': 'pain during bowel movements'}"
-      - title: "Pain in anal region"
-        payload: "/select_symptoms{'symptom': 'pain in anal region'}"
-      - title: "Painful walking"
-        payload: "/select_symptoms{'symptom': 'painful walking'}"
-      - title: "Palpitations"
-        payload: "/select_symptoms{'symptom': 'palpitations'}"
-      - title: "Passage of gases"
-        payload: "/select_symptoms{'symptom': 'passage of gases'}"
-      - title: "Patches in throat"
-        payload: "/select_symptoms{'symptom': 'patches in throat'}"
-      - title: "Phlegm"
-        payload: "/select_symptoms{'symptom': 'phlegm'}"
-      - title: "Polyuria"
-        payload: "/select_symptoms{'symptom': 'polyuria'}"
-      - title: "Prominent veins on calf"
-        payload: "/select_symptoms{'symptom': 'prominent veins on calf'}"
-      - title: "Puffy face and eyes"
-        payload: "/select_symptoms{'symptom': 'puffy face and eyes'}"
-      - title: "Pus filled pimples"
-        payload: "/select_symptoms{'symptom': 'pus filled pimples'}"
-      - title: "Receiving blood transfusion"
-        payload: "/select_symptoms{'symptom': 'receiving blood transfusion'}"
-      - title: "Receiving unsterile injections"
-        payload: "/select_symptoms{'symptom': 'receiving unsterile injections'}"
-      - title: "Red sore around nose"
-        payload: "/select_symptoms{'symptom': 'red sore around nose'}"
-      - title: "Red spots over body"
-        payload: "/select_symptoms{'symptom': 'red spots over body'}"
-      - title: "Redness of eyes"
-        payload: "/select_symptoms{'symptom': 'redness of eyes'}"
-      - title: "Restlessness"
-        payload: "/select_symptoms{'symptom': 'restlessness'}"
-      - title: "Runny nose"
-        payload: "/select_symptoms{'symptom': 'runny nose'}"
-      - title: "Rusty sputum"
-        payload: "/select_symptoms{'symptom': 'rusty sputum'}"
-      - title: "Scurring"
-        payload: "/select_symptoms{'symptom': 'scurring'}"
-      - title: "Shivering"
-        payload: "/select_symptoms{'symptom': 'shivering'}"
-      - title: "Silver like dusting"
-        payload: "/select_symptoms{'symptom': 'silver like dusting'}"
-      - title: "Sinus pressure"
-        payload: "/select_symptoms{'symptom': 'sinus pressure'}"
-      - title: "Skin peeling"
-        payload: "/select_symptoms{'symptom': 'skin peeling'}"
-      - title: "Skin rash"
-        payload: "/select_symptoms{'symptom': 'skin rash'}"
-      - title: "Slurred speech"
-        payload: "/select_symptoms{'symptom': 'slurred speech'}"
-      - title: "Small dents in nails"
-        payload: "/select_symptoms{'symptom': 'small dents in nails'}"
-      - title: "Spinning movements"
-        payload: "/select_symptoms{'symptom': 'spinning movements'}"
-      - title: "Spotting urination"
-        payload: "/select_symptoms{'symptom': 'spotting urination'}"
-      - title: "Stiff neck"
-        payload: "/select_symptoms{'symptom': 'stiff neck'}"
-      - title: "Stomach bleeding"
-        payload: "/select_symptoms{'symptom': 'stomach bleeding'}"
-      - title: "Stomach pain"
-        payload: "/select_symptoms{'symptom': 'stomach pain'}"
-      - title: "Sunken eyes"
-        payload: "/select_symptoms{'symptom': 'sunken eyes'}"
-      - title: "Sweating"
-        payload: "/select_symptoms{'symptom': 'sweating'}"
-      - title: "Swelled lymph nodes"
-        payload: "/select_symptoms{'symptom': 'swelled lymph nodes'}"
-      - title: "Swelling joints"
-        payload: "/select_symptoms{'symptom': 'swelling joints'}"
-      - title: "Swelling of stomach"
-        payload: "/select_symptoms{'symptom': 'swelling of stomach'}"
-      - title: "Swollen blood vessels"
-        payload: "/select_symptoms{'symptom': 'swollen blood vessels'}"
-      - title: "Swollen extremeties"
-        payload: "/select_symptoms{'symptom': 'swollen extremeties'}"
-      - title: "Swollen legs"
-        payload: "/select_symptoms{'symptom': 'swollen legs'}"
-      - title: "Throat irritation"
-        payload: "/select_symptoms{'symptom': 'throat irritation'}"
-      - title: "Toxic look (typhos)"
-        payload: "/select_symptoms{'symptom': 'toxic look (typhos)'}"
-      - title: "Ulcers on tongue"
-        payload: "/select_symptoms{'symptom': 'ulcers on tongue'}"
-      - title: "Unsteadiness"
-        payload: "/select_symptoms{'symptom': 'unsteadiness'}"
-      - title: "Visual disturbances"
-        payload: "/select_symptoms{'symptom': 'visual disturbances'}"
-      - title: "Vomiting"
-        payload: "/select_symptoms{'symptom': 'vomiting'}"
-      - title: "Watering from eyes"
-        payload: "/select_symptoms{'symptom': 'watering from eyes'}"
-      - title: "Weakness in limbs"
-        payload: "/select_symptoms{'symptom': 'weakness in limbs'}"
-      - title: "Weakness of one body side"
-        payload: "/select_symptoms{'symptom': 'weakness of one body side'}"
-      - title: "Weight gain"
-        payload: "/select_symptoms{'symptom': 'weight gain'}"
-      - title: "Weight loss"
-        payload: "/select_symptoms{'symptom': 'weight loss'}"
-      - title: "Yellow crust ooze"
-        payload: "/select_symptoms{'symptom': 'yellow crust ooze'}"
-      - title: "Yellow urine"
-        payload: "/select_symptoms{'symptom': 'yellow urine'}"
-      - title: "Yellowing of eyes"
-        payload: "/select_symptoms{'symptom': 'yellowing of eyes'}"
-      - title: "Yellowish skin"
-        payload: "/select_symptoms{'symptom': 'yellowish skin'}"
-  utter_diseases_menu:
-  - text: "Please select a disease from the list below:"
-    buttons: 
-      - title: "Aids"
-        payload: "/select_diseases{'disease': 'aids'}"
-      - title: "Acne"
-        payload: "/select_diseases{'disease': 'acne'}"
-      - title: "Alcoholic hepatitis"
-        payload: "/select_diseases{'disease': 'alcoholic hepatitis'}"
-      - title: "Allergy"
-        payload: "/select_diseases{'disease': 'allergy'}"
-      - title: "Arthritis"
-        payload: "/select_diseases{'disease': 'arthritis'}"
-      - title: "Bronchial asthma"
-        payload: "/select_diseases{'disease': 'bronchial asthma'}"
-      - title: "Cervical spondylosis"
-        payload: "/select_diseases{'disease': 'cervical spondylosis'}"
-      - title: "Chicken pox"
-        payload: "/select_diseases{'disease': 'chicken pox'}"
-      - title: "Chronic cholestasis"
-        payload: "/select_diseases{'disease': 'chronic cholestasis'}"
-      - title: "Common cold"
-        payload: "/select_diseases{'disease': 'common cold'}"
-      - title: "Dengue"
-        payload: "/select_diseases{'disease': 'dengue'}"
-      - title: "Diabetes "
-        payload: "/select_diseases{'disease': 'diabetes '}"
-      - title: "Dimorphic hemmorhoids piles"
-        payload: "/select_diseases{'disease': 'dimorphic hemmorhoids piles'}"
-      - title: "Drug reaction"
-        payload: "/select_diseases{'disease': 'drug reaction'}"
-      - title: "Fungal infection"
-        payload: "/select_diseases{'disease': 'fungal infection'}"
-      - title: "Gerd"
-        payload: "/select_diseases{'disease': 'gerd'}"
-      - title: "Gastroenteritis"
-        payload: "/select_diseases{'disease': 'gastroenteritis'}"
-      - title: "Heart attack"
-        payload: "/select_diseases{'disease': 'heart attack'}"
-      - title: "Hepatitis b"
-        payload: "/select_diseases{'disease': 'hepatitis b'}"
-      - title: "Hepatitis c"
-        payload: "/select_diseases{'disease': 'hepatitis c'}"
-      - title: "Hepatitis d"
-        payload: "/select_diseases{'disease': 'hepatitis d'}"
-      - title: "Hepatitis e"
-        payload: "/select_diseases{'disease': 'hepatitis e'}"
-      - title: "Hypertension "
-        payload: "/select_diseases{'disease': 'hypertension '}"
-      - title: "Hyperthyroidism"
-        payload: "/select_diseases{'disease': 'hyperthyroidism'}"
-      - title: "Hypoglycemia"
-        payload: "/select_diseases{'disease': 'hypoglycemia'}"
-      - title: "Hypothyroidism"
-        payload: "/select_diseases{'disease': 'hypothyroidism'}"
-      - title: "Impetigo"
-        payload: "/select_diseases{'disease': 'impetigo'}"
-      - title: "Jaundice"
-        payload: "/select_diseases{'disease': 'jaundice'}"
-      - title: "Malaria"
-        payload: "/select_diseases{'disease': 'malaria'}"
-      - title: "Migraine"
-        payload: "/select_diseases{'disease': 'migraine'}"
-      - title: "Osteoarthristis"
-        payload: "/select_diseases{'disease': 'osteoarthristis'}"
-      - title: "Paralysis brain hemorrhage"
-        payload: "/select_diseases{'disease': 'paralysis brain hemorrhage'}"
-      - title: "Peptic ulcer diseae"
-        payload: "/select_diseases{'disease': 'peptic ulcer diseae'}"
-      - title: "Pneumonia"
-        payload: "/select_diseases{'disease': 'pneumonia'}"
-      - title: "Psoriasis"
-        payload: "/select_diseases{'disease': 'psoriasis'}"
-      - title: "Tuberculosis"
-        payload: "/select_diseases{'disease': 'tuberculosis'}"
-      - title: "Typhoid"
-        payload: "/select_diseases{'disease': 'typhoid'}"
-      - title: "Urinary tract infection"
-        payload: "/select_diseases{'disease': 'urinary tract infection'}"
-      - title: "Varicose veins"
-        payload: "/select_diseases{'disease': 'varicose veins'}"
-      - title: "Hepatitis a"
-        payload: "/select_diseases{'disease': 'hepatitis a'}"
-      - title: "Vertigo paroymsal positional vertigo"
-        payload: "/select_diseases{'disease': 'vertigo paroymsal positional vertigo'}"
-
-
+  - text: The Symptom Checker is a program that predicts your disease based on your symptoms. If you insert atleast 5 symptoms, I will predict your disease!
+  utter_thanks:
+  - text: Thank you for entering your symptoms!
+  utter_ask_flu_symptoms:
+  - text: |-
+      Are you experiencing any of the following symptoms: (Type "None" if none apply) 
+      - Dehydration 
+      - Fatigue 
+      - High fever 
+      - Mild fever 
+      - Loss of smell 
+      - Shivering 
+      - Sweating 
+      - Weight loss 
+      - Chills 
+      - Malaise - General feeling of discomfort or uneasiness
+  utter_ask_respiratory_symptoms:
+  - text: |-
+      Are you experiencing  any of the following respiratory symptoms: (Type "None" if none apply) 
+      - Cough 
+      - Rusty sputum - redish-brown mucus when coughing 
+      - Breathlessness
+  utter_ask_gastro_symptoms:
+  - text: |-
+      Are you experiencing any of the following symptoms related to your stomach or digestive system: (Type "None" if none apply) 
+      - Constipation 
+      - Diarrhea 
+      - Nausea 
+      - Vomiting 
+      - Swelling of Stomach 
+      - Loss of Appetite 
+      - Acidity such as acid reflux or heartburn
+  utter_ask_neuro_symptoms:
+  - text: |-
+      Are you experiencing any of the following symptoms related to your nervous system: (Type "None" if none apply) 
+      - Headache 
+      - Irritability 
+      - Lack of concentration 
+      - Loss of balance 
+      - Muscle weakness 
+      - Painful walking 
+      - Slurred speech 
+      - Stiff neck 
+      - Unsteadiness 
+      - Altered sensorium which includes confusion, amnesia, etc.
+  utter_ask_body_pain_symptoms:
+  - text: |-
+      Are you experiencing pain in any of the following areas: (Type "None" if none apply) 
+      - Chest pain 
+      - Joints pain 
+      - Knees pain 
+      - Muscles pain 
+      - Neck pain 
+      - Pain in Anal Region
+  utter_ask_skin_nails_symptoms:
+  - text: |-
+      Have you noticed any of the following issues with your skin or nails lately: (Type "None" if none apply) 
+      - Bruising 
+      - Itching 
+      - Nodal skin eruptions 
+      - Pus filled pimples 
+      - Red spots over body 
+      - Skin rash 
+      - Yellow crust ooze 
+      - Yellowish skin 
+      - Small dents in nails 
+      - Brittle nails
+  utter_ask_internal_itching_symptoms:
+  - text: Do you feel any internal itching?
+    buttons:
+    - title: Yes
+      payload: /affirm
+    - title: No
+      payload: /deny
+  utter_ask_appearance_symptoms:
+  - text: |-
+      Have you noticed the following changes in your appearance: (Type "None" if none apply) 
+      - Yellowing of eyes 
+      - Patches in throat
+  utter_ask_reproductive_symptoms:
+  - text: If applicable, are you experiencing any abnormal menstrual symptoms?
+    buttons:
+    - title: Yes
+      payload: /affirm
+    - title: No
+      payload: /deny
+    - title: Not applicable
+      payload: /deny
+  utter_ask_urinary_symptoms:
+  - text: |-
+      Are you experiencing any of the following urinary symptoms: (Type "None" if none apply) 
+      - Dark urine 
+      - Spotting during urination 
+      - Bladder discomfort 
+      - Excessive urination
+  utter_ask_unsterile_injections_symptoms:
+  - text: Do you believe you have received any unsterile injections lately?
+    buttons:
+    - title: Yes
+      payload: /affirm
+    - title: No
+      payload: /deny
+  utter_ask_family_history:
+  - text: Do you have a family history of any illnesses or medical conditions?
+    buttons:
+    - title: Yes
+      payload: /affirm
+    - title: No
+      payload: /deny
 actions:
-- utter_greet
-- utter_goodbye
-- utter_default_menu
+- action_confirm_symptoms
 - utter_symptom_checker
-- utter_symptoms_menu
-- utter_diseases_menu
-- utter_ask_symptoms
-- utter_reset_symptoms
-- action_select_symptoms
 - action_select_diseases
 - action_predict_disease
-- action_clear_symptoms
-
-
+- utter_thanks
+- action_reset_symptoms
+- utter_greet
+- utter_default_menu
+- validate_symptom_checker_form
+- utter_goodbye
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
