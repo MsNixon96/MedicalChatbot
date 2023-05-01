@@ -116,6 +116,36 @@ slots:
       conditions:
       - active_loop: symptom_checker_form
         requested_slot: internal_itching_symptoms
+  blood_transfusions:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: blood_transfusions
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: blood_transfusions
+  alcohol_consumption:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: alcohol_consumption
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: alcohol_consumption
   appearance_symptoms:
     type: text
     mappings:
@@ -228,75 +258,124 @@ responses:
     - title: Learn more about a disease
       payload: /select_diseases
   utter_symptom_checker:
-  - text: The Symptom Checker is a program that predicts your disease based on your symptoms. If you insert atleast 5 symptoms, I will predict your disease!
+  - text: The Symptom Checker is a program that predicts your disease based on your symptoms. If you insert atleast 2 symptoms, I will predict your disease!
   utter_thanks:
   - text: Thank you for entering your symptoms!
   utter_ask_flu_symptoms:
   - text: |-
       Are you experiencing any of the following symptoms: (Type "None" if none apply) 
-      - Dehydration 
-      - Fatigue 
-      - High fever 
-      - Mild fever 
-      - Loss of smell 
-      - Shivering 
-      - Sweating 
-      - Weight loss 
-      - Chills 
-      - Malaise - General feeling of discomfort or uneasiness
+      - Chills
+      - Cold hands and feet
+      - Cramps
+      - Dehydration
+      - Fatigue
+      - Fast heart rate
+      - Fluid overload in your body
+      - High fever
+      - Irregular sugar level
+      - Loss of smell
+      - Malaise: General feeling of discomfort or uneasiness
+      - Mild fever
+      - Palpitations
+      - Restlessness
+      - Shivering
+      - Sweating
   utter_ask_respiratory_symptoms:
   - text: |-
       Are you experiencing  any of the following respiratory symptoms: (Type "None" if none apply) 
-      - Cough 
-      - Rusty sputum - redish-brown mucus when coughing 
+      - Blood in sputum
       - Breathlessness
+      - Congestion
+      - Cough
+      - Mucoid sputum: clear, white, or grey mucus
+      - Phlegm
+      - Runny nose
+      - Rusty sputum: redish-brown mucus when coughing
+      - Sinus pressure
+      - Throat irritation
   utter_ask_gastro_symptoms:
   - text: |-
       Are you experiencing any of the following symptoms related to your stomach or digestive system: (Type "None" if none apply) 
-      - Constipation 
-      - Diarrhea 
-      - Nausea 
-      - Vomiting 
-      - Swelling of Stomach 
-      - Loss of Appetite 
       - Acidity such as acid reflux or heartburn
+      - Belly pain
+      - Constipation
+      - Cramps
+      - Diarrhea
+      - Indigestion
+      - Increased appetite
+      - Loss of Appetite
+      - Nausea
+      - Swelling of Stomach
+      - Vomiting
   utter_ask_neuro_symptoms:
   - text: |-
       Are you experiencing any of the following symptoms related to your nervous system: (Type "None" if none apply) 
-      - Headache 
-      - Irritability 
-      - Lack of concentration 
-      - Loss of balance 
-      - Muscle weakness 
-      - Painful walking 
-      - Slurred speech 
-      - Stiff neck 
-      - Unsteadiness 
       - Altered sensorium which includes confusion, amnesia, etc.
+      - Depression
+      - Dizziness
+      - Headache
+      - Irritability
+      - Lack of concentration
+      - Loss of balance
+      - Movement stiffness
+      - Muscle weakness
+      - Painful walking
+      - Slurred speech
+      - Spinning movements
+      - Stiff neck
+      - Unsteadiness
+      - Visual disturbances
+      - Weakness in limbs
+      - Weakness of one body side
   utter_ask_body_pain_symptoms:
   - text: |-
       Are you experiencing pain in any of the following areas: (Type "None" if none apply) 
-      - Chest pain 
-      - Joints pain 
-      - Knee pain 
-      - Muscle pain 
-      - Neck pain 
+      - Abdominal pain
+      - Back pain
+      - Chest pain
+      - Hip joint pain
+      - Joint pain
+      - Knee pain
+      - Muscle pain
+      - Neck pain
+      - Pain behind the eyes
       - Pain in Anal Region
+      - Stomach pain
   utter_ask_skin_nails_symptoms:
   - text: |-
       Have you noticed any of the following issues with your skin or nails lately: (Type "None" if none apply) 
-      - Bruising 
-      - Itching 
-      - Nodal skin eruptions 
-      - Pus filled pimples 
-      - Red spots over body 
-      - Skin rash 
-      - Yellow crust ooze 
-      - Yellowish skin 
-      - Small dents in nails 
+      - Blister
       - Brittle nails
+      - Bruising
+      - Dischromic patches - skin discoloration or patches of uneven color
+      - Inflammatory nails
+      - Itching
+      - Nodal skin eruptions
+      - Pus filled pimples
+      - Red sore around nose
+      - Red spots over body
+      - Skin peeling
+      - Skin rash
+      - Silver like dusting
+      - Small dents in nails
+      - Yellow crust ooze
+      - Yellowish skin
   utter_ask_internal_itching_symptoms:
   - text: Do you feel any internal itching?
+    buttons:
+    - title: Yes
+      payload: /affirm
+    - title: No
+      payload: /deny
+  utter_ask_blood_transfusions:
+  - text: Have you received any blood transfusions?
+    buttons:
+    - title: Yes
+      payload: /affirm
+    - title: No
+      payload: /deny
+  utter_ask_alcohol_consumption:
+  - text: Do you have a history of alcohol consumption?
     buttons:
     - title: Yes
       payload: /affirm
@@ -305,8 +384,20 @@ responses:
   utter_ask_appearance_symptoms:
   - text: |-
       Have you noticed the following changes in your appearance: (Type "None" if none apply) 
-      - Yellowing of eyes 
+      - Enlarged thyroid
       - Patches in throat
+      - Prominent veins on calf
+      - Redness of eyes
+      - Swelled lymph nodes
+      - Swollen extremities
+      - Swollen legs
+      - Swelling joints
+      - Toxic look (typhos)
+      - Ulcers on tongue
+      - Watering from eyes
+      - Weight gain
+      - Weight loss
+      - Yellowing of eyes
   utter_ask_reproductive_symptoms:
   - text: If applicable, are you experiencing any abnormal menstrual symptoms?
     buttons:
@@ -317,12 +408,14 @@ responses:
     - title: Not applicable
       payload: /deny
   utter_ask_urinary_symptoms:
-  - text: |-
+  - text: |
       Are you experiencing any of the following urinary symptoms: (Type "None" if none apply) 
-      - Dark urine 
-      - Spotting during urination 
-      - Bladder discomfort 
-      - Excessive urination
+      - Bladder discomfort
+      - Continuous feel of urine
+      - Dark urine
+      - Passage of gases
+      - Polyuria: excessive urination
+      - Spotting urination
   utter_ask_unsterile_injections_symptoms:
   - text: Do you believe you have received any unsterile injections lately?
     buttons:
