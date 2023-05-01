@@ -94,8 +94,9 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `flu_symptoms` value."""
-        FLU_SYMPTOMS = ["dehydration", "fatigue", "high fever", "loss of smell", "mild fever", "shivering", "sweating", "weight loss",
-                "chills", "malaise"]
+        
+        FLU_SYMPTOMS = ['chills', 'cold hands and feet', 'cramps', 'dehydration', 'fatigue', 'fast heart rate', 'fluid overload',
+                        'high fever', 'irregular sugar level', 'loss of smell', 'malaise','mild fever', 'palpitations', 'restlessness', 'shivering', 'sweating']
         return self.validate_multiOption_slot("flu_symptoms", FLU_SYMPTOMS, dispatcher, tracker, domain)
 
     def validate_respiratory_symptoms(
@@ -106,7 +107,8 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `respiratory_symptoms` value."""
-        RESPIRATORY_SYMPTOMS = ["cough", "rusty sputum", "breathlessness"]
+        RESPIRATORY_SYMPTOMS = ['blood in sputum', 'breathlessness', 'congestion', 'cough', 'mucoid sputum', 'phlegm', 
+                                'runny nose', 'rusty sputum', 'sinus pressure', 'throat irritation']
         return self.validate_multiOption_slot("respiratory_symptoms", RESPIRATORY_SYMPTOMS, dispatcher, tracker, domain)
         
     def validate_gastro_symptoms(
@@ -117,7 +119,8 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `gastro_symptoms` value."""
-        GASTRO_SYMPTOMS = ["constipation", "diarrhea", "nausea", "vomiting", "swelling of stomach", "loss of appetite", "acidity"]
+        GASTRO_SYMPTOMS = ['acidity', 'belly pain', 'constipation', 'cramps', 'diarrhea', 'indigestion', 
+                           'increased appetite', 'loss of appetite', 'nausea', 'swelling of stomach', 'vomiting']
         return self.validate_multiOption_slot("gastro_symptoms", GASTRO_SYMPTOMS, dispatcher, tracker, domain)
         
     def validate_neuro_symptoms(
@@ -128,8 +131,9 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `neuro_symptoms` value."""
-        NEURO_SYMPTOMS = ["coma", "headache", "irritability", "lack of concentration", "loss of balance", "muscle weakness", 
-                          "painful walking", "slurred speech", "stiff neck", "unsteadiness", "altered sensorium"]
+        NEURO_SYMPTOMS = ['altered sensorium', 'depression', 'dizziness', 'headache', 'irritability', 'lack of concentration', 
+                          'loss of balance', 'movement stiffness', 'muscle weakness', 'painful walking', 'slurred speech', 
+                          'spinning movements', 'stiff neck', 'unsteadiness', 'visual disturbances', 'weakness in limbs', 'weakness of one body side']
         return self.validate_multiOption_slot("neuro_symptoms", NEURO_SYMPTOMS, dispatcher, tracker, domain)
         
     def validate_body_pain_symptoms(
@@ -140,7 +144,8 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `body_pain_symptoms` value."""
-        BODY_PAIN_SYMPTOMS = ["joints pain", "knee pain", "muscle pain", "neck pain", "pain in anal region", "abdominal pain", "stomach pain", "chest pain"]
+        BODY_PAIN_SYMPTOMS = ['abdominal pain', 'back pain', 'chest pain', 'hip joint pain', 'joint pain', 'knee pain', 
+                              'muscle pain', 'neck pain', 'pain behind the eyes', 'pain in anal region', 'stomach pain']
         return self.validate_multiOption_slot("body_pain_symptoms", BODY_PAIN_SYMPTOMS, dispatcher, tracker, domain)
         
     def validate_skin_nails_symptoms(
@@ -151,8 +156,10 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `skin_nails_symptoms` value."""
-        SKIN_NAILS_SYMPTOMS = ["bruising", "itching", "nodal skin eruptions", "pus filled pimples", "red spots over body", "skin rash",
-                               "small dents in nails", "yellow crust ooze", "yellowish skin", "brittle nails"]
+        SKIN_NAILS_SYMPTOMS = ['blister', 'brittle nails', 'bruising', 'dischromic patches', 'inflammatory nails', 
+                               'itching', 'nodal skin eruptions', 'pus filled pimples', 'red sore around nose', 
+                               'red spots over body', 'skin peeling', 'skin rash', 'silver like dusting', 'small dents in nails', 
+                               'yellow crust ooze', 'yellowish skin']
         return self.validate_multiOption_slot("skin_nails_symptoms", SKIN_NAILS_SYMPTOMS, dispatcher, tracker, domain)
         
     def validate_internal_itching_symptoms(
@@ -164,6 +171,26 @@ class ValidateSymptomCheckerForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate `internal_itching_symptoms` value."""
         return self.validate_boolOptions_slot("internal_itching_symptoms", "internal itching", dispatcher, tracker, domain)
+    
+    def validate_blood_transfusions(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate `blood_transfusions` value."""
+        return self.validate_boolOptions_slot("blood_transfusions", "receiving blood transfusion", dispatcher, tracker, domain)
+    
+    def validate_alcohol_consumption(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate `alcohol_consumption` value."""
+        return self.validate_boolOptions_slot("alcohol_consumption", "history of alcohol consumption", dispatcher, tracker, domain)
         
     def validate_appearance_symptoms(
         self,
@@ -173,7 +200,9 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `appearance_symptoms` value."""
-        APPEARANCE_SYMPTOMS = ["yellowing of eyes", "patches in throat"]
+        APPEARANCE_SYMPTOMS = ['enlarged thyroid', 'patches in throat', 'prominent veins on calf', 'redness of eyes', 
+                               'swelled lymph nodes', 'swollen extremities', 'swollen legs', 'swelling joints', 
+                               'toxic look typhos', 'ulcers on tongue', 'watering from eyes', 'weight gain', 'weight loss', 'yellowing of eyes']
         return self.validate_multiOption_slot("appearance_symptoms", APPEARANCE_SYMPTOMS, dispatcher, tracker, domain)
     
     def validate_reproductive_symptoms(
@@ -194,7 +223,7 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `urinary_symptoms` value."""
-        URINARY_SYMPTOMS = ["dark urine", "spotting urination", "bladder discomfort", "polyuria"]
+        URINARY_SYMPTOMS = ['bladder discomfort', 'continuous feel of urine', 'dark urine', 'passage of gases', 'polyuria: excessive urination', 'spotting urination']
         return self.validate_multiOption_slot("urinary_symptoms", URINARY_SYMPTOMS, dispatcher, tracker, domain)
 
     def validate_unsterile_injections_symptoms(
@@ -259,28 +288,29 @@ class ActionPredictDisease(Action):
         # get the symptoms entered by the user
         symptoms = tracker.get_slot("symptoms")
 
-        # Check if the user has entered at least 5 symptoms
-        if len(symptoms) < 5:
+        # Check if the user has entered at least 2 symptoms
+        if len(symptoms) < 2:
             dispatcher.utter_message(text="You have entered {} symptoms so far. To continue using the Symptom Checker, please enter at least 5 symptoms.".format((5-len(symptoms))))
             # slot_sets.append(FollowupAction("symptom_checker_form"))
             return [AllSlotsReset(), SlotSet("symptoms", symptoms), FollowupAction("symptom_checker_form")]
         else:
             # perform the disease prediction and return info about the disease
 
-            symptoms_List = ['itching', 'skin rash', 'nodal skin eruptions', 'continuous sneezing', 
-                             'shivering', 'chills', 'joint pain', 'stomach pain', 'acidity', 'vomiting', 
-                             'spotting  urination', 'fatigue', 'weight loss', 'lethargy', 'patches in throat', 'cough', 
-                             'high fever', 'breathlessness', 'sweating', 'dehydration', 'headache', 'yellowish skin', 'dark urine', 
-                             'nausea', 'loss of appetite', 'pain behind the eyes', 'back pain', 'abdominal pain', 'diarrhoea', 'mild fever', 
-                             'yellowing of eyes', 'swelling of stomach', 'swelled lymph nodes', 'malaise', 'phlegm', 'throat irritation', 'chest pain', 
-                             'fast heart rate', 'pain during bowel movements', 'pain in anal region', 'bloody stool', 'neck pain', 'dizziness', 'bruising', 
-                             'obesity', 'enlarged thyroid', 'excessive hunger', 'extra marital contacts', 'slurred speech', 'knee pain', 'muscle weakness', 
-                             'stiff neck', 'swelling joints', 'movement stiffness', 'spinning movements', 'loss of balance', 'unsteadiness', 
-                             'weakness of one body side', 'bladder discomfort', 'continuous feel of urine', 'internal itching', 'toxic look typhos', 
-                             'depression', 'irritability', 'muscle pain', 'altered sensorium', 'red spots over body', 'belly pain', 'abnormal menstruation', 
-                             'dischromic  patches', 'increased appetite', 'polyuria', 'family history', 'mucoid sputum', 'rusty sputum', 'lack of concentration', 
-                             'visual disturbances', 'receiving blood transfusion', 'receiving unsterile injections', 'coma', 'stomach bleeding', 'blood in sputum', 
-                             'prominent veins on calf', 'palpitations', 'pus filled pimples', 'blackheads', 'silver like dusting', 'small dents in nails', 'blister', 'red sore around nose']
+            symptoms_List = ['itching', 'nodal skin eruptions', 'shivering', 'chills', 'joint pain', 'stomach pain', 'ulcers on tongue', 'spotting  urination', 
+                             'weight gain', 'cold hands and feets', 'weight loss', 'restlessness', 'patches in throat', 'irregular sugar level', 'sweating', 
+                             'indigestion', 'headache', 'dark urine', 'nausea', 'loss of appetite', 'pain behind the eyes', 'back pain', 'constipation', 
+                             'abdominal pain', 'diarrhoea', 'mild fever', 'yellowing of eyes', 'swelling of stomach', 'swelled lymph nodes', 'malaise', 
+                             'phlegm', 'throat irritation', 'redness of eyes', 'sinus pressure', 'runny nose', 'congestion', 'chest pain', 'weakness in limbs', 
+                             'fast heart rate', 'neck pain', 'dizziness', 'cramps', 'bruising', 'swollen legs', 'enlarged thyroid', 'brittle nails', 
+                             'swollen extremeties', 'slurred speech', 'knee pain', 'hip joint pain', 'muscle weakness', 'stiff neck', 'swelling joints', 
+                             'movement stiffness', 'spinning movements', 'loss of balance', 'unsteadiness', 'weakness of one body side', 'loss of smell', 
+                             'bladder discomfort', 'continuous feel of urine', 'passage of gases', 'internal itching', 'toxic look (typhos)', 'depression', 
+                             'irritability', 'muscle pain', 'altered sensorium', 'red spots over body', 'belly pain', 'abnormal menstruation', 
+                             'dischromic  patches', 'watering from eyes', 'increased appetite', 'polyuria', 'family history', 'mucoid sputum', 'rusty sputum', 
+                             'lack of concentration', 'visual disturbances', 'receiving blood transfusion', 'receiving unsterile injections', 
+                             'history of alcohol consumption', 'fluid overload.1', 'blood in sputum', 'prominent veins on calf', 'palpitations', 'painful walking', 
+                             'skin peeling', 'silver like dusting', 'small dents in nails', 'inflammatory nails', 'blister', 'red sore around nose', 
+                             'yellow crust ooze']
             
             symptoms_array = np.array([1 if s in symptoms else 0 for s in symptoms_List]).reshape(1, -1)
 
