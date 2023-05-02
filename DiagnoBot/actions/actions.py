@@ -323,28 +323,31 @@ class ActionPredictDisease(Action):
 
             #predict disease based off of pickled model
             y_pred = model.predict(symptoms_array)
-            predicted_disease = le.inverse_transform(y_pred)
+            predicted_disease = le.inverse_transform(y_pred).item()
 
-            with open("symptom_description.csv", "r") as f:
-                csvRead = csv.DictReader(f)
-                for row in csvRead:
-                    if row["Disease"].lower() == predicted_disease.lower():
-                        disInfo = row["Description"]
-                        predicted_disease = predicted_disease.title()
-                        dispatcher.utter_message(f"Here is some more information about {predicted_disease}: \n {disInfo}")
-                        break
+            if predicted_disease:
+                dispatcher.utter_message(f"I predict that you have: {predicted_disease}")
+                with open("symptom_description.csv", "r") as f:
+                    csvRead = csv.DictReader(f)
+                    for row in csvRead:
+                        if row["Disease"].lower() == predicted_disease.lower():
+                            disInfo = row["Description"]
+                            predicted_disease = predicted_disease.title()
+                            dispatcher.utter_message(f"Here is some more information about {predicted_disease}: \n {disInfo}")
+                            break
 
-            #Give the user a list of precautions to be aware of with their possible condition. 
-            with open("symptom_precaution.csv", "r") as f:
-                csvPrec = csv.DictReader(f)
-                for row in csvPrec:
-                    if  row["Disease"].lower() == predicted_disease.lower():
-                        prec1 = row["Precaution_1"]
-                        prec2 = row["Precaution_2"]
-                        prec3 = row["Precaution_3"]
-                        prec4 = row["Precaution_4"]
-                        dispatcher.utter_message(f"When suffering from {predicted_disease} you must take care to: {prec1}, {prec2}, {prec3}, and {prec4}.")
-                        dispatcher.utter_message(text="The advice given by this chatbot is not intended as a replacement for professional medical advice. As with any medical issue, be sure to consult with your physician.")
+                #Give the user a list of precautions to be aware of with their possible condition. 
+                with open("symptom_precaution.csv", "r") as f:
+                    csvPrec = csv.DictReader(f)
+                    for row in csvPrec:
+                        if  row["Disease"].lower() == predicted_disease.lower():
+                            prec1 = row["Precaution_1"]
+                            prec2 = row["Precaution_2"]
+                            prec3 = row["Precaution_3"]
+                            prec4 = row["Precaution_4"]
+                            dispatcher.utter_message(f"When suffering from {predicted_disease} you must take care to: {prec1}, {prec2}, {prec3}, and {prec4}.")
+                            dispatcher.utter_message(text="The advice given by this chatbot is not intended as a replacement for professional medical advice. As with any medical issue, be sure to consult with your physician.")
+                            break
 
         message = f"What would you like to do now?"
         buttons = [{"title": "Try the Symptom Checker again", "payload": "/start_over"}, {"title": "Learn about another disease", "payload": "/select_diseases"}]
