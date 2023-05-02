@@ -5,8 +5,6 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 
-# This is a simple example for a custom action which utters "Hello World!"
-
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker, FormValidationAction
@@ -16,6 +14,7 @@ from rasa_sdk.types import DomainDict
 import pickle
 import csv
 import numpy as np
+import pandas as pd
 
 
 class ValidateSymptomCheckerForm(FormValidationAction):
@@ -224,7 +223,7 @@ class ValidateSymptomCheckerForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate `reproductive_symptoms` value."""
         return self.validate_boolOptions_slot("reproductive_symptoms", "abnormal menstruation", dispatcher, tracker, domain)
-    def validate_reproductive_symptoms(
+    def validate_liver_failure(
         self,
         slot_value: Any,
         dispatcher: CollectingDispatcher,
@@ -307,10 +306,11 @@ class ActionPredictDisease(Action):
         
         # get the symptoms entered by the user
         symptoms = tracker.get_slot("symptoms")
+        print(symptoms)
 
         # Check if the user has entered at least 2 symptoms
         if len(symptoms) < 2:
-            dispatcher.utter_message(text="You have entered {} symptoms so far. To continue using the Symptom Checker, please enter at least 5 symptoms.".format((5-len(symptoms))))
+            dispatcher.utter_message(text="You have entered {} symptoms so far. To continue using the Symptom Checker, please enter at least 2 symptoms.".format((2-len(symptoms))))
             # slot_sets.append(FollowupAction("symptom_checker_form"))
             return [AllSlotsReset(), SlotSet("symptoms", symptoms), FollowupAction("symptom_checker_form")]
         else:
@@ -332,33 +332,49 @@ class ActionPredictDisease(Action):
                              'history of alcohol consumption', 'fluid overload.1', 'blood in sputum', 'prominent veins on calf', 'palpitations', 'painful walking', 'pus filled pimples', 'blackheads', 'scurring', 
                              'skin peeling', 'silver like dusting', 'small dents in nails', 'inflammatory nails', 'blister', 'red sore around nose', 'yellow crust ooze']
             
-            symptoms_array = np.array([1 if s in symptoms else 0 for s in symptoms_List]).reshape(1, -1)
-            print("symptoms_array:")
-            print(symptoms_array)
-            print("symptoms:")
-            print(symptoms)
+            data = {}
+            for symptomCol in symptoms_List:
+                data[symptomCol] = [0]  # set the default value to 0
+                for userSymptom in symptoms:
+                    if userSymptom.lower() == symptomCol.lower():
+                        data[symptomCol] = [1]  # set the value to 1 if there is a match
+                        break  # exit the inner loop once a match is found
+
+            df = pd.DataFrame(data)
+            print("df")
+            print(df)
+            print()
 
             # load pickled data
             with open("diseasePrediction/model.pkl", "rb") as f:
                 model = pickle.load(f)
 
-            with open("diseasePrediction/rfe_model.pkl", "rb") as f:
+            with open("diseasePrediction/rfe_model.pickle", "rb") as f:
                 rfe = pickle.load(f)
 
             with open("diseasePrediction/le.pkl", "rb") as f:
                 le = pickle.load(f)
 
-            #predict disease based off of pickled model
-            symptoms_array = rfe.transform(symptoms_array) # apply feature selection
-            y_pred = model.predict(symptoms_array) # predict disesae
-            predicted_disease = le.inverse_transform(y_pred).item() # get disease label
+            # Apply feature selection using the RFE model
+            X_selected = rfe.transform(df)  # apply feature selection
+            print("X_selected")
+            print(X_selected)
+            print(type(X_selected))
+
+            # Make a prediction using the model
+            y_pred = model.predict(X_selected)
+
+            # Convert the predicted label to the actual label name using the LabelEncoder
+            predicted_disease = le.inverse_transform(y_pred)
+            print(predicted_disease)
+            predicted_disease = str(predicted_disease[0]).lower()
 
             if predicted_disease:
                 dispatcher.utter_message(f"I predict that you have: {predicted_disease}")
                 with open("symptom_description.csv", "r") as f:
                     csvRead = csv.DictReader(f)
                     for row in csvRead:
-                        if row["Disease"].lower() == predicted_disease.lower():
+                        if row["Disease"].lower() == predicted_disease:
                             disInfo = row["Description"]
                             predicted_disease = predicted_disease.title()
                             dispatcher.utter_message(f"Here is some more information about {predicted_disease}: \n {disInfo}")
@@ -368,7 +384,7 @@ class ActionPredictDisease(Action):
                 with open("symptom_precaution.csv", "r") as f:
                     csvPrec = csv.DictReader(f)
                     for row in csvPrec:
-                        if  row["Disease"].lower() == predicted_disease.lower():
+                        if  row["Disease"].lower() == predicted_disease:
                             prec1 = row["Precaution_1"]
                             prec2 = row["Precaution_2"]
                             prec3 = row["Precaution_3"]
