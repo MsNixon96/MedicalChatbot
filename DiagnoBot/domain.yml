@@ -225,6 +225,36 @@ slots:
       conditions:
       - active_loop: symptom_checker_form
         requested_slot: family_history
+  extra_marital_contacts:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: extra_marital_contacts
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: extra_marital_contacts
+  liver_failure:
+    type: text
+    mappings:
+    - type: from_intent
+      intent: deny
+      value: false
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: liver_failure
+    - type: from_intent
+      intent: affirm
+      value: true
+      conditions:
+      - active_loop: symptom_checker_form
+        requested_slot: liver_failure
   disease:
     type: text
     mappings:
@@ -234,6 +264,7 @@ forms:
   symptom_checker_form:
     required_slots:
     - alcohol_consumption
+    - liver_failure
     - flu_symptoms
     - respiratory_symptoms
     - gastro_symptoms
@@ -247,6 +278,7 @@ forms:
     - unsterile_injections_symptoms
     - blood_transfusions
     - family_history
+    - extra_marital_contacts
 responses:
   utter_greet:
   - text: Hi there! I"m DiagnoBot, a medical chatbot!
@@ -266,6 +298,7 @@ responses:
   utter_ask_flu_symptoms:
   - text: |-
       Are you experiencing any of the following symptoms: (Type "None" if none apply) 
+      - Blurred and distorted vision
       - Chills
       - Cold hands and feet
       - Cramps
@@ -278,6 +311,7 @@ responses:
       - Loss of smell
       - Malaise: General feeling of discomfort or uneasiness
       - Mild fever
+      - Obesity
       - Palpitations
       - Restlessness
       - Shivering
@@ -288,6 +322,7 @@ responses:
       - Blood in sputum
       - Breathlessness
       - Congestion
+      - Continuous sneezing
       - Cough
       - Mucoid sputum: clear, white, or grey mucus
       - Phlegm
@@ -303,24 +338,31 @@ responses:
       - Constipation
       - Cramps
       - Diarrhea
+      - Distention of abdomen: feeling of being bloated
+      - Excessive hunger
       - Indigestion
       - Increased appetite
       - Loss of Appetite
       - Nausea
       - Swelling of Stomach
+      - Stomach bleeding
       - Vomiting
   utter_ask_neuro_symptoms:
   - text: |-
       Are you experiencing any of the following symptoms related to your nervous system: (Type "None" if none apply) 
       - Altered sensorium which includes confusion, amnesia, etc.
+      - Anxiety
       - Depression
       - Dizziness
       - Headache
       - Irritability
       - Lack of concentration
+      - Lethargy
       - Loss of balance
+      - Mood swings
       - Movement stiffness
       - Muscle weakness
+      - Muscle wasting
       - Painful walking
       - Slurred speech
       - Spinning movements
@@ -346,10 +388,12 @@ responses:
   utter_ask_skin_nails_symptoms:
   - text: |-
       Have you noticed any of the following issues with your skin or nails lately: (Type "None" if none apply) 
+      - Blackheads
       - Blister
       - Brittle nails
       - Bruising
       - Dischromic patches - skin discoloration or patches of uneven color
+      - Drying and tingling lips
       - Inflammatory nails
       - Itching
       - Nodal skin eruptions
@@ -383,18 +427,28 @@ responses:
       payload: /affirm
     - title: No
       payload: /deny
+  utter_ask_liver_failure:
+  - text: Do you have acute liver failure?
+    buttons:
+    - title: Yes
+      payload: /affirm
+    - title: No
+      payload: /deny
   utter_ask_appearance_symptoms:
   - text: |-
       Have you noticed the following changes in your appearance: (Type "None" if none apply) 
       - Enlarged thyroid
       - Patches in throat
       - Prominent veins on calf
+      - Puffy face and eyes
       - Redness of eyes
       - Swelled lymph nodes
+      - Swollen blood vessels
       - Swollen extremities
       - Swollen legs
       - Swelling joints
-      - Toxic look (typhos)
+      - Sunken eyes
+      - Toxic look: typhos
       - Ulcers on tongue
       - Watering from eyes
       - Weight gain
@@ -413,11 +467,17 @@ responses:
   - text: |
       Are you experiencing any of the following urinary symptoms: (Type "None" if none apply) 
       - Bladder discomfort
+      - Bloody stool
+      - Burning micturition: buringing feeling during urination
       - Continuous feel of urine
       - Dark urine
+      - Foul smell of urine
+      - Irritation in anus
+      - Pain during bowel movements
       - Passage of gases
       - Polyuria: excessive urination
       - Spotting urination
+      - Yellow urine
   utter_ask_unsterile_injections_symptoms:
   - text: Do you believe you have received any unsterile injections lately?
     buttons:
@@ -427,6 +487,13 @@ responses:
       payload: /deny
   utter_ask_family_history:
   - text: Do you have a family history of any illnesses or medical conditions?
+    buttons:
+    - title: Yes
+      payload: /affirm
+    - title: No
+      payload: /deny
+  utter_ask_extra_marital_contacts:
+  - text: Do you have extra marital contacts?
     buttons:
     - title: Yes
       payload: /affirm
