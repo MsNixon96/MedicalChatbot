@@ -366,12 +366,12 @@ df_results
 # In[ ]:
 
 
-with open('le.pkl', 'wb') as f:
+with open('diseasePrediction/le.pkl', 'wb') as f:
     pickle.dump(le, f)
 
-with open('model.pkl', 'wb') as f:
+with open('diseasePrediction/model.pkl', 'wb') as f:
     pickle.dump(svc, f)
 
-with open('rfe_model.pickle', 'wb') as f:
+with open('diseasePrediction/rfe_model.pickle', 'wb') as f:
     pickle.dump(rfe, f)
 
