@@ -233,6 +233,7 @@ slots:
 forms:
   symptom_checker_form:
     required_slots:
+    - alcohol_consumption
     - flu_symptoms
     - respiratory_symptoms
     - gastro_symptoms
@@ -244,6 +245,7 @@ forms:
     - reproductive_symptoms
     - urinary_symptoms
     - unsterile_injections_symptoms
+    - blood_transfusions
     - family_history
 responses:
   utter_greet:
