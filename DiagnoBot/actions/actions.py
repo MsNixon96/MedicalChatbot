@@ -95,8 +95,8 @@ class ValidateSymptomCheckerForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate `flu_symptoms` value."""
         
-        FLU_SYMPTOMS = ['chills', 'cold hands and feet', 'cramps', 'dehydration', 'fatigue', 'fast heart rate', 'fluid overload',
-                        'high fever', 'irregular sugar level', 'loss of smell', 'malaise','mild fever', 'palpitations', 'restlessness', 'shivering', 'sweating']
+        FLU_SYMPTOMS = ['blurred and distorted vision', 'chills', 'cold hands and feet', 'cramps', 'dehydration', 'fatigue', 'fast heart rate', 'fluid overload',
+                        'high fever', 'irregular sugar level', 'loss of smell', 'malaise','mild fever', 'obesity', 'palpitations', 'restlessness', 'shivering', 'sweating']
         return self.validate_multiOption_slot("flu_symptoms", FLU_SYMPTOMS, dispatcher, tracker, domain)
 
     def validate_respiratory_symptoms(
@@ -119,7 +119,7 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `gastro_symptoms` value."""
-        GASTRO_SYMPTOMS = ['acidity', 'belly pain', 'constipation', 'cramps', 'diarrhea', 'indigestion', 
+        GASTRO_SYMPTOMS = ['acidity', 'belly pain', 'constipation', 'cramps', 'diarrhea', 'distention of abdomen', 'excessive hunger', 'indigestion', 
                            'increased appetite', 'loss of appetite', 'nausea', 'swelling of stomach', 'vomiting']
         return self.validate_multiOption_slot("gastro_symptoms", GASTRO_SYMPTOMS, dispatcher, tracker, domain)
         
@@ -131,8 +131,8 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `neuro_symptoms` value."""
-        NEURO_SYMPTOMS = ['altered sensorium', 'depression', 'dizziness', 'headache', 'irritability', 'lack of concentration', 
-                          'loss of balance', 'movement stiffness', 'muscle weakness', 'painful walking', 'slurred speech', 
+        NEURO_SYMPTOMS = ['altered sensorium', 'anxiety', 'depression', 'dizziness', 'headache', 'irritability', 'lack of concentration', 'lethargy',
+                          'loss of balance', 'mood swings','movement stiffness', 'muscle weakness', 'muscle wasting', 'painful walking', 'slurred speech', 
                           'spinning movements', 'stiff neck', 'unsteadiness', 'visual disturbances', 'weakness in limbs', 'weakness of one body side']
         return self.validate_multiOption_slot("neuro_symptoms", NEURO_SYMPTOMS, dispatcher, tracker, domain)
         
@@ -156,7 +156,7 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `skin_nails_symptoms` value."""
-        SKIN_NAILS_SYMPTOMS = ['blister', 'brittle nails', 'bruising', 'dischromic patches', 'inflammatory nails', 
+        SKIN_NAILS_SYMPTOMS = ['blackheads', 'blister', 'brittle nails', 'bruising', 'dischromic patches', 'drying and tingling lips', 'inflammatory nails', 
                                'itching', 'nodal skin eruptions', 'pus filled pimples', 'red sore around nose', 
                                'red spots over body', 'skin peeling', 'skin rash', 'silver like dusting', 'small dents in nails', 
                                'yellow crust ooze', 'yellowish skin']
@@ -191,6 +191,16 @@ class ValidateSymptomCheckerForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate `alcohol_consumption` value."""
         return self.validate_boolOptions_slot("alcohol_consumption", "history of alcohol consumption", dispatcher, tracker, domain)
+    
+    def validate_extra_marital_contacts(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate `extra_marital_contacts` value."""
+        return self.validate_boolOptions_slot("extra_marital_contacts", "extra marital contacts", dispatcher, tracker, domain)
         
     def validate_appearance_symptoms(
         self,
@@ -200,8 +210,8 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `appearance_symptoms` value."""
-        APPEARANCE_SYMPTOMS = ['enlarged thyroid', 'patches in throat', 'prominent veins on calf', 'redness of eyes', 
-                               'swelled lymph nodes', 'swollen extremities', 'swollen legs', 'swelling joints', 
+        APPEARANCE_SYMPTOMS = ['enlarged thyroid', 'patches in throat', 'prominent veins on calf', 'puffy face and eyes', 'redness of eyes', 
+                               'swelled lymph nodes', 'swollen blood vessels', 'swollen extremities', 'swollen legs', 'swelling joints', 'sucken eyes',
                                'toxic look typhos', 'ulcers on tongue', 'watering from eyes', 'weight gain', 'weight loss', 'yellowing of eyes']
         return self.validate_multiOption_slot("appearance_symptoms", APPEARANCE_SYMPTOMS, dispatcher, tracker, domain)
     
@@ -214,6 +224,15 @@ class ValidateSymptomCheckerForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         """Validate `reproductive_symptoms` value."""
         return self.validate_boolOptions_slot("reproductive_symptoms", "abnormal menstruation", dispatcher, tracker, domain)
+    def validate_reproductive_symptoms(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate `liver_failure` value."""
+        return self.validate_boolOptions_slot("liver_failure", "acute liver failure", dispatcher, tracker, domain)
         
     def validate_urinary_symptoms(
         self,
@@ -223,7 +242,8 @@ class ValidateSymptomCheckerForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate `urinary_symptoms` value."""
-        URINARY_SYMPTOMS = ['bladder discomfort', 'continuous feel of urine', 'dark urine', 'passage of gases', 'polyuria: excessive urination', 'spotting urination']
+        URINARY_SYMPTOMS = ['bladder discomfort', 'bloody stool', 'burning micturition', 'continuous feel of urine', 'dark urine', 'foul smell of urine', 'irritation in anus',
+                            'pain during bowel movements', 'passage of gases', 'polyuria', 'spotting urination', 'yellow urine']
         return self.validate_multiOption_slot("urinary_symptoms", URINARY_SYMPTOMS, dispatcher, tracker, domain)
 
     def validate_unsterile_injections_symptoms(
@@ -296,34 +316,42 @@ class ActionPredictDisease(Action):
         else:
             # perform the disease prediction and return info about the disease
 
-            symptoms_List = ['itching', 'nodal skin eruptions', 'shivering', 'chills', 'joint pain', 'stomach pain', 'ulcers on tongue', 'spotting  urination', 
-                             'weight gain', 'cold hands and feets', 'weight loss', 'restlessness', 'patches in throat', 'irregular sugar level', 'sweating', 
-                             'indigestion', 'headache', 'dark urine', 'nausea', 'loss of appetite', 'pain behind the eyes', 'back pain', 'constipation', 
-                             'abdominal pain', 'diarrhoea', 'mild fever', 'yellowing of eyes', 'swelling of stomach', 'swelled lymph nodes', 'malaise', 
-                             'phlegm', 'throat irritation', 'redness of eyes', 'sinus pressure', 'runny nose', 'congestion', 'chest pain', 'weakness in limbs', 
-                             'fast heart rate', 'neck pain', 'dizziness', 'cramps', 'bruising', 'swollen legs', 'enlarged thyroid', 'brittle nails', 
-                             'swollen extremeties', 'slurred speech', 'knee pain', 'hip joint pain', 'muscle weakness', 'stiff neck', 'swelling joints', 
-                             'movement stiffness', 'spinning movements', 'loss of balance', 'unsteadiness', 'weakness of one body side', 'loss of smell', 
-                             'bladder discomfort', 'continuous feel of urine', 'passage of gases', 'internal itching', 'toxic look (typhos)', 'depression', 
-                             'irritability', 'muscle pain', 'altered sensorium', 'red spots over body', 'belly pain', 'abnormal menstruation', 
-                             'dischromic  patches', 'watering from eyes', 'increased appetite', 'polyuria', 'family history', 'mucoid sputum', 'rusty sputum', 
-                             'lack of concentration', 'visual disturbances', 'receiving blood transfusion', 'receiving unsterile injections', 
-                             'history of alcohol consumption', 'fluid overload.1', 'blood in sputum', 'prominent veins on calf', 'palpitations', 'painful walking', 
-                             'skin peeling', 'silver like dusting', 'small dents in nails', 'inflammatory nails', 'blister', 'red sore around nose', 
-                             'yellow crust ooze']
+            symptoms_List = ['itching', 'skin rash', 'nodal skin eruptions', 'continuous sneezing', 'shivering', 'chills', 'joint pain', 'stomach pain', 'acidity', 
+                             'ulcers on tongue', 'muscle wasting', 'vomiting', 'burning micturition', 'spotting  urination', 'fatigue', 'weight gain', 'anxiety', 
+                             'cold hands and feets', 'mood swings', 'weight loss', 'restlessness', 'lethargy', 'patches in throat', 'irregular sugar level', 'cough', 
+                             'high fever', 'sunken eyes', 'breathlessness', 'sweating', 'dehydration', 'indigestion', 'headache', 'yellowish skin', 'dark urine', 'nausea', 
+                             'loss of appetite', 'pain behind the eyes', 'back pain', 'constipation', 'abdominal pain', 'diarrhoea', 'mild fever', 'yellow urine', 'yellowing of eyes', 
+                             'acute liver failure', 'fluid overload', 'swelling of stomach', 'swelled lymph nodes', 'malaise', 'blurred and distorted vision', 'phlegm', 'throat irritation', 
+                             'redness of eyes', 'sinus pressure', 'runny nose', 'congestion', 'chest pain', 'weakness in limbs', 'fast heart rate', 'pain during bowel movements', 'pain in anal region', 
+                             'bloody stool', 'irritation in anus', 'neck pain', 'dizziness', 'cramps', 'bruising', 'obesity', 'swollen legs', 'swollen blood vessels', 'puffy face and eyes', 'enlarged thyroid', 
+                             'brittle nails', 'swollen extremeties', 'excessive hunger', 'extra marital contacts', 'drying and tingling lips', 'slurred speech', 'knee pain', 'hip joint pain', 'muscle weakness', 
+                             'stiff neck', 'swelling joints', 'movement stiffness', 'spinning movements', 'loss of balance', 'unsteadiness', 'weakness of one body side', 'loss of smell', 'bladder discomfort', 
+                             'foul smell of urine', 'continuous feel of urine', 'passage of gases', 'internal itching', 'toxic look (typhos)', 'depression', 'irritability', 'muscle pain', 'altered sensorium', 
+                             'red spots over body', 'belly pain', 'abnormal menstruation', 'dischromic  patches', 'watering from eyes', 'increased appetite', 'polyuria', 'family history', 'mucoid sputum', 
+                             'rusty sputum', 'lack of concentration', 'visual disturbances', 'receiving blood transfusion', 'receiving unsterile injections', 'coma', 'stomach bleeding', 'distention of abdomen', 
+                             'history of alcohol consumption', 'fluid overload.1', 'blood in sputum', 'prominent veins on calf', 'palpitations', 'painful walking', 'pus filled pimples', 'blackheads', 'scurring', 
+                             'skin peeling', 'silver like dusting', 'small dents in nails', 'inflammatory nails', 'blister', 'red sore around nose', 'yellow crust ooze']
             
             symptoms_array = np.array([1 if s in symptoms else 0 for s in symptoms_List]).reshape(1, -1)
+            print("symptoms_array:")
+            print(symptoms_array)
+            print("symptoms:")
+            print(symptoms)
 
             # load pickled data
             with open("diseasePrediction/model.pkl", "rb") as f:
                 model = pickle.load(f)
 
+            with open("diseasePrediction/rfe_model.pkl", "rb") as f:
+                rfe = pickle.load(f)
+
             with open("diseasePrediction/le.pkl", "rb") as f:
                 le = pickle.load(f)
 
             #predict disease based off of pickled model
-            y_pred = model.predict(symptoms_array)
-            predicted_disease = le.inverse_transform(y_pred).item()
+            symptoms_array = rfe.transform(symptoms_array) # apply feature selection
+            y_pred = model.predict(symptoms_array) # predict disesae
+            predicted_disease = le.inverse_transform(y_pred).item() # get disease label
 
             if predicted_disease:
                 dispatcher.utter_message(f"I predict that you have: {predicted_disease}")
