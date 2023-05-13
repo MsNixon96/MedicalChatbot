@@ -1,4 +1,0 @@
-Implementation of six different model which working with Training.csv
-Six models includes Decision Tree Classifier, Random forest classifier, Support Vector Machine, K-neighbors Classifier, Adaboost Classifier, Gradient Boosting Classifier
-within above models, Random Forest, Adaboost, and Gradient Boosting classifiers are selected as models of the final project
-Gradient Boosting Classifier shows the highest accuracy above all.
