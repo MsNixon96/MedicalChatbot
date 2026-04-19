@@ -7,7 +7,7 @@ This project builds a medical chatbot that can predict a user's disease based on
 To run the assistant locally you'll first need to clone. 
 
 ```
-git clone https://github.com/MsNixon96/CSCI-595-Project.git
+git clone https://github.com/MsNixon96/MedicalChatbot.git
 ```
 
 Next, install rasa. 
