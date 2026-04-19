@@ -1,6 +1,3 @@
-# CSCI-595-Project
-Project work for CSCI-595-Medical Chatbot Project
-
 # Medical Chatbot
 
 This project builds a medical chatbot that can predict a user's disease based on symptoms and return medical advice. The chatbot is built using RASA. The disease-symptom checking function is built using a pipeline model of three machine learning algorithms: Random Forest, Adaboost and Gradient Boost. 
